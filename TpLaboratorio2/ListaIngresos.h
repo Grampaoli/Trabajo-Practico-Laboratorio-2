@@ -6,7 +6,7 @@ typedef struct{
     int DniEmpleado;
     char ApellidoYnombreEmpleado[40];
     char Usuario[20];
-    char Contraseña[20];
+    char Contrasena[20];
     char perfil[20];
 
 }empleadoLab;
@@ -18,7 +18,7 @@ typedef struct{
     char FechaRetiro[10];
     int DniPaciente;
     int MatriculaProfesional;
-    int Eliminado = 0;
+    int Eliminado;
 
 }ingreso;
 
@@ -26,8 +26,9 @@ typedef struct nodoIngreso{
 
     ingreso Ingreso;
     nodoPracXIngreso * listaPracXingreso;
-    nodoIngreso* anterior;
-    nodoIngreso* siguiente;
+
+    struct nodoIngreso* anterior;
+    struct nodoIngreso* siguiente;
 
 }nodoIngreso;
 

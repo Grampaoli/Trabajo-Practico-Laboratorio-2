@@ -5,10 +5,11 @@ nodoIngreso* inicListaDIngreso(){
 }
 
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso){
-    nodoIngreso* auxListaD = (nodoIngreso*)malloc(nodoIngreso);
+
+    nodoIngreso * auxListaD = (nodoIngreso*)malloc(sizeof(nodoIngreso));
     auxListaD->Ingreso.DniPaciente = UnIngreso.DniPaciente;
     auxListaD->Ingreso.Eliminado = UnIngreso.Eliminado;
-    auxListaD->Ingreso.MatriculaProfesional = UnIngreso.
+    auxListaD->Ingreso.MatriculaProfesional = UnIngreso.MatriculaProfesional;
     strcpy(auxListaD->Ingreso.FechaIngreso,UnIngreso.FechaIngreso);
     strcpy(auxListaD->Ingreso.FechaRetiro,UnIngreso.FechaRetiro);
     auxListaD->listaPracXingreso = inicListaPracXIngreso();

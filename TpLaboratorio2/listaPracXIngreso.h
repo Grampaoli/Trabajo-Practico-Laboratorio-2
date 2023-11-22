@@ -7,7 +7,7 @@
 typedef struct{
     int NroPract;
     char nombrePract[30];
-    int eliminado = 0;
+    int Eliminado;
 }practicaLab;
 
 typedef struct{
@@ -21,7 +21,7 @@ typedef struct{
 typedef struct nodoPracXIngreso{
 
     pracXIngreso practicaXIngreso;
-    nodoPracXIngreso * siguiente;
+    struct nodoPracXIngreso * siguiente;
 
 }nodoPracXIngreso;
 

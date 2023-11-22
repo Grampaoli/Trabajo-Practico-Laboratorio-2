@@ -6,21 +6,23 @@
 typedef struct{
 char ApellidoYNombe[40];
 int Edad;
+int Dni;
 char Direccion[30];
 char Telefono[15];
-int Eliminado = 0;
+int Eliminado;
 }paciente;
 
 typedef struct nodoArbol{
 paciente Paciente;
-nodoIngresos* listaIngresos;
+nodoIngreso* listaIngresos;
 struct nodoArbol* izq;
 struct nodoArbol* der;
 }nodoArbol;
 
 nodoArbol* inicArbol();
 nodoArbol* crearNodoArbol(paciente Paciente);
-nodoArbol* insertarNodoArbol(nodoArbol* arbolPac, paciente Paciente);
-
-
+nodoArbol* insertarNodoArbol(nodoArbol* arbolPac, nodoArbol* nuevoNodo); //Para comparar cadenas -1 si la primera menor 1 si la primera mayor y 0 si son iguales (siendo a menor y z mayor de todas)
+void inOrderArbolPac(nodoArbol* arbolPac);
+void mostrarUnNodo(nodoArbol* arbolAux);
+nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char dato[]);
 #endif // ARBOLPACIENTES_H_INCLUDED
