@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
+
 typedef struct{
     int NroPract;
     char nombrePract[30];
@@ -23,5 +24,8 @@ typedef struct nodoPracXIngreso{
     nodoPracXIngreso * siguiente;
 
 }nodoPracXIngreso;
+
+nodoPracXIngreso * inicListaPracXIngreso();
+nodoPracXIngreso * crearNodoPracXingreso(pracXIngreso PracticasXingreso);
 
 #endif // LISTAPRACXINGRESO_H_INCLUDED

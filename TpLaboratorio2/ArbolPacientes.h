@@ -16,10 +16,11 @@ paciente Paciente;
 nodoIngresos* listaIngresos;
 struct nodoArbol* izq;
 struct nodoArbol* der;
-
-
 }nodoArbol;
 
+nodoArbol* inicArbol();
+nodoArbol* crearNodoArbol(paciente Paciente);
+nodoArbol* insertarNodoArbol(nodoArbol* arbolPac, paciente Paciente);
 
 
 #endif // ARBOLPACIENTES_H_INCLUDED
