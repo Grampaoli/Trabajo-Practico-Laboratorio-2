@@ -1,6 +1,8 @@
 #ifndef LISTAINGRESOS_H_INCLUDED
 #define LISTAINGRESOS_H_INCLUDED
 #include "listaPracXIngreso.h"
+#include "ArbolPacientes.h"
+
 typedef struct{
 
     int DniEmpleado;
@@ -36,6 +38,7 @@ nodoIngreso* inicListaDIngreso();
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso);
 nodoIngreso* agregarPpioListaIngreso(nodoIngreso* listaIngreso, nodoIngreso * nuevoNodoIngreso);
 void mostrarUnNOdoIngreso(nodoIngreso * nodoAux);
-void mostrarLista(nodoIngreso * listaIngreso);
-
+void mostrarListaIngreso(nodoIngreso * listaIngreso);
+nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato);
+nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,int Dni);
 #endif // LISTAINGRESOS_H_INCLUDED
