@@ -10,8 +10,8 @@ int main()
     nodoArbol * arbolPac;
     arbolPac = inicArbol();
 
-    arbolPac = AltaDePaciente(arbolPac);
+    arbolPac = AltaDePacienteIngresar(arbolPac);
 
-    mostrarUnNodoArbol(arbolPac);
+    inOrderArbolPac(arbolPac);
     return 0;
 }

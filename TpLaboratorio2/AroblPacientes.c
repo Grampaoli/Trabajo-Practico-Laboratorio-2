@@ -65,7 +65,9 @@ void mostrarUnNodoArbol(nodoArbol* arbolPac)
         printf("DNI: %i\n",arbolPac->Paciente.Dni);
         printf("Direccion: %s\n",arbolPac->Paciente.Direccion);
         printf("Telefono: %s\n",arbolPac->Paciente.Telefono);
+        printf("-------------------------------------------------------------------------\n");
         mostrarListaIngreso(arbolPac->listaIngresos);
+
 }
 
 nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,paciente UnPaciente){ //esta funcion busca un nombre segun el critero de ordenamiento haciendo eficiente la busqueda
@@ -115,11 +117,12 @@ return rta;
 
 }
 
-nodoArbol* AltaDePaciente(nodoArbol* arbolPac){
+nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac){
     nodoArbol* rta = inicArbol();
     paciente UnPaciente;
     char seguir ='s';
     nodoArbol* aux = inicArbol();
+    int Dni;
     while(seguir == 's')
     {
 
@@ -153,8 +156,9 @@ nodoArbol* AltaDePaciente(nodoArbol* arbolPac){
         printf("\n");
         UnPaciente.Eliminado = 0;
 
+        Dni = UnPaciente.Dni;
         aux = crearNodoArbol(UnPaciente);
-        aux->listaIngresos = altaDeIngreso(aux->listaIngresos,UnPaciente.Dni);
+        aux->listaIngresos = altaDeIngreso(aux->listaIngresos,Dni);
 
         arbolPac = insertarNodoArbol(arbolPac,aux);
 

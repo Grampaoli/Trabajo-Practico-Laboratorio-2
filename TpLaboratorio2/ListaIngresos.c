@@ -39,13 +39,15 @@ nodoIngreso * agregarPpioListaIngreso(nodoIngreso * listaIngreso, nodoIngreso* n
 }
 void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
 {
-    printf("Datos del ingreso--------\n");
-    printf("Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
-    printf("Dni del Paciente %i\n",nodoAux->Ingreso.DniPaciente);
-    printf("Matricula del profesional: %i\n",nodoAux->Ingreso.MatriculaProfesional);
-    printf("Fecha de ingreso: %s\n",nodoAux->Ingreso.FechaIngreso);
-    printf("Fecha de Retiro: %s \n",nodoAux->Ingreso.FechaRetiro);
-    printf("-------------------------------------------------------------------------\n");
+    printf("   //////////////////////////////////////////////////////////////\n");
+    printf("   Datos del ingreso--------\n");
+    printf("   Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
+    printf("   Dni del Paciente %i\n",nodoAux->Ingreso.DniPaciente);
+    printf("   Matricula del profesional: %i\n",nodoAux->Ingreso.MatriculaProfesional);
+    printf("   Fecha de ingreso: %s\n",nodoAux->Ingreso.FechaIngreso);
+    printf("   Fecha de Retiro: %s \n",nodoAux->Ingreso.FechaRetiro);
+    printf("   -------------------------------------------------------------------------\n");
+    mostrarListaPracXingreso(nodoAux->listaPracXingreso);
 
 
 }
@@ -115,6 +117,7 @@ nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,int Dni)
        //aqui agregaremos la otra lista de Practica por ingreso
 
        auxNuevo = crearNodoDIngreso(Ingreso);
+       auxNuevo->listaPracXingreso = altaDePractica(auxNuevo->listaPracXingreso,dato);
        listaIngreso = agregarPpioListaIngreso(listaIngreso,auxNuevo);
 
        printf("Desea cargarle otro ingreso al paciente ? S/N");

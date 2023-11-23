@@ -1,6 +1,7 @@
 #ifndef ARBOLPACIENTES_H_INCLUDED
 #define ARBOLPACIENTES_H_INCLUDED
 #include "ListaIngresos.h"
+#include "listaPracXIngreso.h"
 
 
 typedef struct{
@@ -26,6 +27,6 @@ void inOrderArbolPac(nodoArbol* arbolPac);
 void mostrarUnNodoArbol(nodoArbol* arbolAux);
 nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,paciente UnPaciente);
 nodoArbol* buscarNodoArbolPacDni(nodoArbol * arbolPac,int Dni,nodoArbol* rta);
-nodoArbol* AltaDePaciente(nodoArbol* arbolPac);
+nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac);
 #endif // ARBOLPACIENTES_H_INCLUDED
 
