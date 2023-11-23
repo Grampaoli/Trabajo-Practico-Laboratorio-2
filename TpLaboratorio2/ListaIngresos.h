@@ -34,6 +34,8 @@ typedef struct nodoIngreso{
 
 nodoIngreso* inicListaDIngreso();
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso);
-
+nodoIngreso* agregarPpioListaIngreso(nodoIngreso* listaIngreso, nodoIngreso * nuevoNodoIngreso);
+void mostrarUnNOdoIngreso(nodoIngreso * nodoAux);
+void mostrarLista(nodoIngreso * listaIngreso);
 
 #endif // LISTAINGRESOS_H_INCLUDED

@@ -27,5 +27,8 @@ typedef struct nodoPracXIngreso{
 
 nodoPracXIngreso * inicListaPracXIngreso();
 nodoPracXIngreso * crearNodoPracXingreso(pracXIngreso PracticasXingreso);
+nodoPracXIngreso * AgregarPpioPracXingreso(nodoPracXIngreso* listaPracXingreso,nodoPracXIngreso * nuevoNodoPracIngreso);
+void mostrarUnNodoPrac(nodoPracXIngreso* nodoAux);
+void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso);
 
 #endif // LISTAPRACXINGRESO_H_INCLUDED
