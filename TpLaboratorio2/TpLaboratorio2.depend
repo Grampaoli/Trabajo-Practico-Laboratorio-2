@@ -7,21 +7,21 @@
 	<stdlib.h>
 	"string.h"
 
-1700676556 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\main.c
+1700731330 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"ArbolPacientes.h"
 	"listaPracXIngreso.h"
 
-1700676388 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\aroblpacientes.c
+1700729782 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\aroblpacientes.c
 	"ArbolPacientes.h"
 
-1700675947 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\arbolpacientes.h
+1700731330 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\arbolpacientes.h
 	"ListaIngresos.h"
 
 1700679422 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.h
 	"listaPracXIngreso.h"
 
-1700679422 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.c
+1700679539 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.c
 	"ListaIngresos.h"
 

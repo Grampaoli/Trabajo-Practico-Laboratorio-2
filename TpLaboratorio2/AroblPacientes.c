@@ -68,7 +68,7 @@ void mostrarUnNodo(nodoArbol* arbolPac)
         printf("---------------------------------\n");
 }
 
-nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char dato[]){
+/*nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char dato[]){
 
 nodoArbol * rta=NULL;
 
@@ -91,5 +91,28 @@ nodoArbol * rta=NULL;
 
         return rta;
 
+
+}*/
+
+nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,int Dni,nodoArbol * rta){
+
+
+    if(arbolPac!=NULL)
+    {
+
+       rta = buscarNodoArbolPac(arbolPac->izq,Dni,rta);
+        if(arbolPac->Paciente.Dni == Dni)
+        {
+            rta = arbolPac;
+            return rta;
+            mostrarUnNodo(rta);
+        }
+       rta = buscarNodoArbolPac(arbolPac->der,Dni,rta);
+
+    }
+
+
+
+return rta;
 
 }
