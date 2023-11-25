@@ -43,6 +43,9 @@ nodoPracXIngreso * AgregarPpioPracXingreso(nodoPracXIngreso* listaPracXingreso,n
     return listaPracXingreso;
 }
 
+
+
+
 void mostrarUnNodoPrac(nodoPracXIngreso* nodoAux)
 {
     printf("      Datos de practicas por ingreso-----------\n");
@@ -64,5 +67,29 @@ void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso)
 
 }
 
+int ArchToPrac(practicaLab Practicas[])
+{
+    FILE* arch = fopen("lasPracticas","rb");
+    int validos = 0;
+    practicaLab auxPr;
+
+
+    if(arch == NULL){
+
+        while(fread(&auxPr,sizeof(practicaLab),1,arch)>0)
+        {
+
+            Practicas[validos] = auxPr;
+            validos++;
+        }
+    }
+
+
+
+    fclose(fclose);
+
+
+    return validos;
+}
 
 

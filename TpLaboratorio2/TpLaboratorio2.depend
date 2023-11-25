@@ -1,18 +1,18 @@
 # depslib dependency file v1.0
-1700946215 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.c
+1700949798 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.c
 	"listaPracXIngreso.h"
 
-1700945419 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.h
+1700949109 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	"string.h"
 
-1700945675 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\main.c
+1700950011 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"ArbolPacientes.h"
 
-1700944988 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\aroblpacientes.c
+1700946294 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\aroblpacientes.c
 	"ArbolPacientes.h"
 	"ListaIngresos.h"
 	"listaPracXIngreso.h"
