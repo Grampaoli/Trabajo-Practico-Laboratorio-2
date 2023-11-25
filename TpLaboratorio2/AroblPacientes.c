@@ -1,4 +1,6 @@
 #include "ArbolPacientes.h"
+#include "ListaIngresos.h"
+#include "listaPracXIngreso.h"
 
 nodoArbol* inicArbol(){
 
@@ -117,27 +119,45 @@ return rta;
 
 }
 
-nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac){
-    nodoArbol* rta = inicArbol();
+nodoArbol* cargarUnPacienteAlNodo(nodoArbol* arbolPac)
+{
+
+
+
+    ingreso UnIngreso;
     paciente UnPaciente;
-    char seguir ='s';
-    nodoArbol* aux = inicArbol();
-    int Dni;
+    pracXIngreso UnaPracIng;
+
+
+    char seguir = 's';
+
     while(seguir == 's')
     {
+        UnPaciente = crearUnPaciente(UnPaciente);
+        UnIngreso.DniPaciente = UnPaciente.Dni;
+        UnIngreso = crearIngreso(UnIngreso);
+        fflush(stdin);
+        UnaPracIng.NroIngreso = UnIngreso.NroIngreso;
+        UnaPracIng = crearUnaPracXingreso(UnaPracIng);
+        fflush(stdin);
+
+        arbolPac = AltaDePacienteIngresar(arbolPac,UnPaciente,UnIngreso,UnaPracIng);
+
+        printf("Desea seguir agregando datos ?\n");
+        fflush(stdin);
+        scanf("%c",&seguir);
+
+    }
+}
+
+
+paciente crearUnPaciente(paciente UnPaciente){
+
 
         printf("Ingrese los datos del paciente:\n");
-        do{
         printf("Nombre y apellido: ");
         fflush(stdin);
         gets(&UnPaciente.ApellidoYNombe);
-        rta = buscarNodoArbolPac(arbolPac,UnPaciente);
-        if(rta != NULL)
-        {
-            printf("\n");
-            printf("ese paciente ya fue ingresado ingrese otro paciente\n");
-        }
-        }while(rta != NULL);
         printf("\n");
         printf("Edad : ");
         scanf("%i",&UnPaciente.Edad);
@@ -156,19 +176,25 @@ nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac){
         printf("\n");
         UnPaciente.Eliminado = 0;
 
-        Dni = UnPaciente.Dni;
-        aux = crearNodoArbol(UnPaciente);
-        aux->listaIngresos = altaDeIngreso(aux->listaIngresos,Dni);
 
-        arbolPac = insertarNodoArbol(arbolPac,aux);
+    return UnPaciente;
+}
 
-        printf("\n");
 
-    printf("Desea cargar otro paciente ? S/N");
-    fflush(stdin);
-    scanf("%c",&seguir);
+nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac,paciente UnPaciente,ingreso UnIngreso,pracXIngreso UnaPracIng){
+    nodoArbol* rta = inicArbol();
 
+    rta = buscarNodoArbolPacDni(arbolPac,UnPaciente.Dni,rta);
+
+    if(rta ==NULL){
+     nodoArbol* nuevoNodo = crearNodoArbol(UnPaciente);
+     nuevoNodo->listaIngresos = altaDeIngreso(nuevoNodo->listaIngresos,UnIngreso,UnaPracIng);
+     arbolPac = insertarNodoArbol(arbolPac,nuevoNodo);
+
+    }else{
+       rta->listaIngresos =  altaDeIngreso(rta->listaIngresos,UnIngreso,UnaPracIng);
     }
+
 
     return arbolPac;
 

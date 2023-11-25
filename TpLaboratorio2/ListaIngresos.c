@@ -39,7 +39,7 @@ nodoIngreso * agregarPpioListaIngreso(nodoIngreso * listaIngreso, nodoIngreso* n
 }
 void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
 {
-    printf("   //////////////////////////////////////////////////////////////\n");
+
     printf("   Datos del ingreso--------\n");
     printf("   Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
     printf("   Dni del Paciente %i\n",nodoAux->Ingreso.DniPaciente);
@@ -82,49 +82,44 @@ nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato)
     return encontrado;
 }
 
-nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,int Dni)
+ingreso crearIngreso(ingreso UnIngreso)
 {
-    char seguir = 's';
-    ingreso Ingreso;
-    nodoIngreso* ingresoBuscado = inicListaDIngreso();
-    nodoIngreso* auxNuevo = inicListaDIngreso();
-    int dato;
-    while(seguir == 's')
-    {
-        do{
         printf("Ingrese Numero de ingreso: ");
-        scanf("%i",&Ingreso.NroIngreso);
+        scanf("%i",&UnIngreso.NroIngreso);
         printf("\n");
-        dato = Ingreso.NroIngreso;
-        ingresoBuscado = buscarIngreso(listaIngreso,dato);
-            if(ingresoBuscado !=NULL)
-            {
-            printf("ese ingresio ya esta hecho ingrese otro\n");
-            }
-        }while(ingresoBuscado !=NULL);
        printf("Ingrese fecha del ingreso: ");
        fflush(stdin);
-       gets(&Ingreso.FechaIngreso);
+       gets(&UnIngreso.FechaIngreso);
        printf("\n");
        printf("Ingrese fecha de retiro del ingreso: ");
        fflush(stdin);
-       gets(&Ingreso.FechaRetiro);
+       gets(&UnIngreso.FechaRetiro);
        printf("\n");
        printf("Ingrese Matricula del profesional: ");
-       scanf("%i",&Ingreso.MatriculaProfesional);
+       scanf("%i",&UnIngreso.MatriculaProfesional);
        printf("\n");
-       Ingreso.DniPaciente = Dni;
-       //aqui agregaremos la otra lista de Practica por ingreso
 
-       auxNuevo = crearNodoDIngreso(Ingreso);
-       auxNuevo->listaPracXingreso = altaDePractica(auxNuevo->listaPracXingreso,dato);
-       listaIngreso = agregarPpioListaIngreso(listaIngreso,auxNuevo);
+    return UnIngreso;
+}
 
-       printf("Desea cargarle otro ingreso al paciente ? S/N");
-        fflush(stdin);
-        scanf("%c",&seguir);
-        printf("\n");
+
+
+nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngreso UnaPracIng)
+{
+    nodoIngreso* ingresoBuscado = inicListaDIngreso();
+
+    ingresoBuscado = buscarIngreso(listaIngreso,UnIngreso.NroIngreso);
+
+    if(ingresoBuscado == NULL)
+    {
+       nodoIngreso* nuevoNodo = crearNodoDIngreso(UnIngreso);
+        nuevoNodo->listaPracXingreso = AgregarPpioPracXingreso(nuevoNodo->listaPracXingreso,crearNodoPracXingreso(UnaPracIng));
+        listaIngreso = agregarPpioListaIngreso(listaIngreso,nuevoNodo);
+    }else{
+      ingresoBuscado->listaPracXingreso = AgregarPpioPracXingreso(ingresoBuscado->listaPracXingreso,crearNodoPracXingreso(UnaPracIng));
     }
+
+
 
     return listaIngreso;
 

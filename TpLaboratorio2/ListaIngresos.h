@@ -1,7 +1,7 @@
 #ifndef LISTAINGRESOS_H_INCLUDED
 #define LISTAINGRESOS_H_INCLUDED
 #include "listaPracXIngreso.h"
-#include "ArbolPacientes.h"
+
 
 typedef struct{
 
@@ -34,11 +34,13 @@ typedef struct nodoIngreso{
 
 }nodoIngreso;
 
+
 nodoIngreso* inicListaDIngreso();
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso);
 nodoIngreso* agregarPpioListaIngreso(nodoIngreso* listaIngreso, nodoIngreso * nuevoNodoIngreso);
 void mostrarUnNOdoIngreso(nodoIngreso * nodoAux);
 void mostrarListaIngreso(nodoIngreso * listaIngreso);
 nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato);
-nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,int Dni);
+nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngreso UnaPracIng);
+ingreso crearIngreso(ingreso UnIngreso);
 #endif // LISTAINGRESOS_H_INCLUDED
