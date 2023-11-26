@@ -8,15 +8,18 @@ int main()
 
         //nodoArbol* arbolPac = inicArbol();
        // arbolPac = cargarUnPacienteAlNodo(arbolPac);
-       // practicaLab Practicas[100];
-       // int validos;
-       // validos = ArchToPrac(Practicas);
 
-        empleadoLab Empleados[CANTMAXEMPLEADOS];
-        int* validos = 0;
 
-        darAltaAgregarUnEmpleado(Empleados,&validos);
-        mostrarEmpleados(Empleados,&validos);
 
+       // empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
+       // int* validosEmpleados = 0;
+
+       // darAltaAgregarUnEmpleado(EMPLEADOS,&validosEmpleados);
+       // mostrarEmpleados(EMPLEADOS,&validos);
+       // practicaLab PRACTICAS[CANTMAXPRACTICAS];
+       // int* validosPracticas = 0;
+
+       // darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
+       // mostrarPractica(PRACTICAS,&validosPracticas);
     return 0;
 }

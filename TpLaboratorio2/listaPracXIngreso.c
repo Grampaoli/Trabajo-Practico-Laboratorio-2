@@ -67,6 +67,8 @@ void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso)
 
 }
 
+
+
 int ArchToPrac(practicaLab Practicas[])
 {
     FILE* arch = fopen("lasPracticas","rb");
@@ -84,8 +86,6 @@ int ArchToPrac(practicaLab Practicas[])
         }
     }
 
-
-
     fclose(fclose);
 
 
@@ -93,3 +93,89 @@ int ArchToPrac(practicaLab Practicas[])
 }
 
 
+
+practicaLab crearPractica()
+{
+    practicaLab UnaPractica;
+
+    printf("Ingrese Numero de practica: ");
+    scanf("%i",&UnaPractica.NroPract);
+    printf("\n");
+    printf("Ingrese el nombre de la practica: ");
+    fflush(stdin);
+    gets(&UnaPractica.nombrePract);
+    UnaPractica.Eliminado = 0;
+
+    return UnaPractica;
+}
+
+void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas){
+
+    practicaLab UnaPractica;
+    char seguir = 's';
+    int i;
+    int flag;
+    while(seguir == 's' && (*validosPracticas)<CANTMAXPRACTICAS)
+    {
+        i = *validosPracticas;
+        UnaPractica = crearPractica();
+
+        flag = buscarUnaPractica(Practicas,i,UnaPractica);
+        if(flag == 0)
+        {
+            insertarOPractica(Practicas,i-1,UnaPractica);
+            (*validosPracticas)++;
+
+        }else{printf("Ya se encontro esa practica ingrese una nueva");}
+
+        printf("Desea agregar otra practia ? S/N:  ");
+        fflush(stdin);
+        scanf("%c",&seguir);
+    }
+
+
+
+}
+void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica)
+{
+    int i = ultimaPos;
+    while(i>=0 && (UnaPractica.NroPract<Practicas[i].NroPract))
+    {
+        Practicas[i+1] = Practicas[i];
+        i--;
+    }
+    Practicas[i+1] = UnaPractica;
+
+}
+
+
+int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractica)
+{
+    int i = 0;
+    int flag = 0;
+    printf("%i",Practicas[i].NroPract);
+
+    while(i<validos && flag == 0)
+    {
+        if(Practicas[i].NroPract == UnaPractica.NroPract)
+        {
+            flag = 1;
+        }
+        i++;
+    }
+    return flag;
+}
+
+void mostrarPractica(practicaLab Practicas[],int* validosPracticas)
+{
+    int j = *validosPracticas;
+    for(int i = 0;i<j;i++)
+    {
+        printf("Datos de la practica--------->\n");
+        printf("Numero de la practica: %i\n",Practicas[i].NroPract);
+        printf("Nombre de la practica: %s\n",Practicas[i].nombrePract);
+        printf("__________________________________________________________\n");
+
+    }
+
+}

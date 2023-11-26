@@ -159,37 +159,34 @@ empleadoLab crearEmpleado(){
 }
 
 
-void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validos)
+void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validosEmpleados)
 {
     empleadoLab UnEmpleado;
     char seguir = 's';
     int i;
     int flag;
-    while(seguir =='s' && (*validos)<CANTMAXEMPLEADOS){
-
-         i = *validos;
-        UnEmpleado = crearEmpleado();
-
-    flag = buscarUnEmpleado(Empleados,i,UnEmpleado);
-    if(flag ==0)
+    while(seguir =='s' && (*validosEmpleados)<CANTMAXEMPLEADOS)
     {
 
+         i = *validosEmpleados;
+        UnEmpleado = crearEmpleado();
 
+        flag = buscarUnEmpleado(Empleados,i,UnEmpleado);
+        if(flag ==0)
+        {
                 insertarEmpleado(Empleados,i-1,UnEmpleado);
-                (*validos)++;
+                (*validosEmpleados)++;
 
-    }else{
+        }else{
 
-        printf("Ya se encontro un empleado con ese nombre\n");
-    }
-
+            printf("Ya se encontro un empleado con ese nombre\n");
+        }
 
         printf("Desea agregar otro empleado ? \n");
         fflush(stdin);
         scanf("%c",&seguir);
 
     }
-
 
 
 }
@@ -231,9 +228,9 @@ int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado)
 
 
 
-void mostrarEmpleados(empleadoLab Empleados[],int* validos)
+void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados)
 {
-    int j = *validos;
+    int j = *validosEmpleados;
     for(int i = 0;i<j;i++)
     {
         printf("Datos del empleado ------->\n");

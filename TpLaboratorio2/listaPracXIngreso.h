@@ -4,7 +4,11 @@
 #include <stdlib.h>
 #include "string.h"
 #define CANTMAXEMPLEADOS 50
-
+#define ADMINISTRADOR "Administrador"
+#define TECNICO "Tecnico"
+#define ADMINISTRATIVO "Administrativo"
+#define BIOQUIMICO "Bioquimico"
+#define CANTMAXPRACTICAS 200
 typedef struct{
     int NroPract;
     char nombrePract[30];
@@ -33,5 +37,10 @@ nodoPracXIngreso * AgregarPpioPracXingreso(nodoPracXIngreso* listaPracXingreso,n
 void mostrarUnNodoPrac(nodoPracXIngreso* nodoAux);
 void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso);
 int ArchToPrac(practicaLab Practicas[]);
+
+void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas);
+void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica);
+int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractica);
+void mostrarPractica(practicaLab Practicas[],int* validosPracticas);
 
 #endif // LISTAPRACXINGRESO_H_INCLUDED
