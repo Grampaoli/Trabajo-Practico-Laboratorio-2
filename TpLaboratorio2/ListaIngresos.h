@@ -1,7 +1,10 @@
 #ifndef LISTAINGRESOS_H_INCLUDED
 #define LISTAINGRESOS_H_INCLUDED
 #include "listaPracXIngreso.h"
-
+#define ADMINISTRADOR "Administrador"
+#define TECNICO "Tecnico"
+#define ADMINISTRATIVO "Administrativo"
+#define BIOQUIMICO "Bioquimico"
 
 typedef struct{
 
@@ -43,4 +46,13 @@ void mostrarListaIngreso(nodoIngreso * listaIngreso);
 nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato);
 nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngreso UnaPracIng);
 ingreso crearIngreso(ingreso UnIngreso);
+
+
+empleadoLab crearEmpleado();
+void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validos);
+void insertarEmpleado(empleadoLab Empleados[],int ultimaPos,empleadoLab UnEmpleado);
+int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado);
+
+void mostrarEmpleados(empleadoLab Empleados[],int* validos);
+
 #endif // LISTAINGRESOS_H_INCLUDED

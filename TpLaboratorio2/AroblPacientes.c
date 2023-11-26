@@ -199,3 +199,31 @@ nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac,paciente UnPaciente,ingres
     return arbolPac;
 
 }
+
+void arbolAArchivo(nodoArbol* arbol)
+{
+    FILE* archArbol = fopen("arbol.bin","w+b");
+
+    if(archArbol !=NULL)
+    {
+        fwrite(arbol,sizeof(nodoArbol*),1,archArbol);
+
+    }
+
+    fclose(archArbol);
+}
+
+
+nodoArbol * ArchToArbol(){
+
+    nodoArbol* aux = inicArbol();
+
+    FILE* archArbol = fopen("arbol.bin","r+b");
+
+    if(archArbol!=NULL)
+    {
+        fread(aux,sizeof(nodoArbol*),1,archArbol);
+    }
+
+    return aux;
+}

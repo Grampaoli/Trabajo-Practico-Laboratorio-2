@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
+#define CANTMAXEMPLEADOS 50
 
 typedef struct{
     int NroPract;

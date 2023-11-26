@@ -31,5 +31,6 @@ paciente crearUnPaciente(paciente UnPaciente);
 nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,paciente UnPaciente);
 nodoArbol* buscarNodoArbolPacDni(nodoArbol * arbolPac,int Dni,nodoArbol* rta);
 nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac,paciente UnPaciente,ingreso UnIngreso,pracXIngreso UnaPracIng);
+void arbolAArchivo(nodoArbol* arbol);
 #endif // ARBOLPACIENTES_H_INCLUDED
 

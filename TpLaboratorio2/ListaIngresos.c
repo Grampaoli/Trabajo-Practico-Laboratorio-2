@@ -124,3 +124,126 @@ nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngr
     return listaIngreso;
 
 }
+
+empleadoLab crearEmpleado(){
+
+    empleadoLab aux;
+
+    printf("Ingrese nombre y apellido del empleado: ");
+    fflush(stdin);
+    gets(&aux.ApellidoYnombreEmpleado);
+    printf("Ingrese Dni del empleado: ");
+    scanf("%i",&aux.DniEmpleado);
+    printf("\n");
+    printf("Ingrese Perfil del empleado [Administrador] ,Profesional de laboratorio [Tecnico o Bioquimico] o [Administrativo]: ");
+    fflush(stdin);
+    gets(&aux.perfil);
+
+    while((strcmp(aux.perfil,ADMINISTRADOR)!= 0)&& (strcmp(aux.perfil,TECNICO)!= 0)&&(strcmp(aux.perfil,ADMINISTRATIVO) != 0)&& strcmp(aux.perfil,BIOQUIMICO)!= 0)
+    {
+        printf("Usted ingreso un perfil incorrecto ingrese uno de los ya mencionado porfavor\n");
+        fflush(stdin);
+        gets(&aux.perfil);
+
+
+    }
+    printf("Ingrese Usuario: ");
+    fflush(stdin);
+    gets(&aux.Usuario);
+    printf("Ingrese contraseña: ");
+    fflush(stdin);
+    gets(&aux.Contrasena);
+
+
+    return aux;
+}
+
+
+void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validos)
+{
+    empleadoLab UnEmpleado;
+    char seguir = 's';
+    int i;
+    int flag;
+    while(seguir =='s' && (*validos)<CANTMAXEMPLEADOS){
+
+         i = *validos;
+        UnEmpleado = crearEmpleado();
+
+    flag = buscarUnEmpleado(Empleados,i,UnEmpleado);
+    if(flag ==0)
+    {
+
+
+                insertarEmpleado(Empleados,i-1,UnEmpleado);
+                (*validos)++;
+
+    }else{
+
+        printf("Ya se encontro un empleado con ese nombre\n");
+    }
+
+
+        printf("Desea agregar otro empleado ? \n");
+        fflush(stdin);
+        scanf("%c",&seguir);
+
+    }
+
+
+
+}
+
+
+void insertarEmpleado(empleadoLab Empleados[],int ultimaPos,empleadoLab UnEmpleado)
+{
+    int i = ultimaPos;
+
+    while((i>=0) && (strcmp(UnEmpleado.ApellidoYnombreEmpleado,Empleados[i].ApellidoYnombreEmpleado)<0))
+    {
+
+        Empleados[i+1] = Empleados[i];
+        i--;
+
+    }
+
+    Empleados[i+1] = UnEmpleado;
+}
+
+int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado)
+{
+  int i = 0;
+  int flag = 0;
+
+    while(i<validos && flag == 0)
+    {
+
+        if(strcasecmp(Empleados[i].ApellidoYnombreEmpleado,UnEmpleado.ApellidoYnombreEmpleado)== 0)
+        {
+            flag = 1;
+        }
+     i++;
+    }
+  return flag;
+}
+
+
+
+
+
+void mostrarEmpleados(empleadoLab Empleados[],int* validos)
+{
+    int j = *validos;
+    for(int i = 0;i<j;i++)
+    {
+        printf("Datos del empleado ------->\n");
+        printf("Nombre y apellido: %s\n",Empleados[i].ApellidoYnombreEmpleado);
+        printf("Dni: %i\n",Empleados[i].DniEmpleado);
+        printf("Perfil: %s\n",Empleados[i].perfil);
+        printf("Usuario: %s\n",Empleados[i].Usuario);
+        printf("Contraseña: ******\n");
+        printf("_____________________________________\n");
+    }
+
+
+}

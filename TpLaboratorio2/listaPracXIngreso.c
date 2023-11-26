@@ -74,7 +74,7 @@ int ArchToPrac(practicaLab Practicas[])
     practicaLab auxPr;
 
 
-    if(arch == NULL){
+    if(arch != NULL){
 
         while(fread(&auxPr,sizeof(practicaLab),1,arch)>0)
         {

@@ -7,12 +7,16 @@ int main()
 {
 
         //nodoArbol* arbolPac = inicArbol();
-        //arbolPac =cargarUnPacienteAlNodo(arbolPac);
-        practicaLab Practicas[400];
-        int validos;
-        validos = ArchToPrac(Practicas);
+       // arbolPac = cargarUnPacienteAlNodo(arbolPac);
+       // practicaLab Practicas[100];
+       // int validos;
+       // validos = ArchToPrac(Practicas);
 
-        printf("%i",validos);
+        empleadoLab Empleados[CANTMAXEMPLEADOS];
+        int* validos = 0;
+
+        darAltaAgregarUnEmpleado(Empleados,&validos);
+        mostrarEmpleados(Empleados,&validos);
 
     return 0;
 }
