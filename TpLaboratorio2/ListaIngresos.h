@@ -3,6 +3,8 @@
 #include "listaPracXIngreso.h"
 
 
+
+
 typedef struct{
 
     int DniEmpleado;
@@ -38,6 +40,7 @@ typedef struct nodoIngreso{
 nodoIngreso* inicListaDIngreso();
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso);
 nodoIngreso* agregarPpioListaIngreso(nodoIngreso* listaIngreso, nodoIngreso * nuevoNodoIngreso);
+void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux);
 void mostrarUnNOdoIngreso(nodoIngreso * nodoAux);
 void mostrarListaIngreso(nodoIngreso * listaIngreso);
 nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato);
@@ -45,10 +48,15 @@ nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngr
 ingreso crearIngreso(ingreso UnIngreso);
 
 
+
 empleadoLab crearEmpleado();
 void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validosEmpleados);
 void insertarEmpleado(empleadoLab Empleados[],int ultimaPos,empleadoLab UnEmpleado);
 int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado);
 void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados);
+
+
+
+
 
 #endif // LISTAINGRESOS_H_INCLUDED

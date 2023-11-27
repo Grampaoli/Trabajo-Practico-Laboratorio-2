@@ -87,7 +87,7 @@ nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char UnPaciente[]){ //esta fu
 
  nodoArbol* rta = NULL;
 
-    printf("%s",arbolPac->Paciente.ApellidoYNombe);
+
     if(arbolPac!=NULL)
     {
         if(strcmp(arbolPac->Paciente.ApellidoYNombe,UnPaciente) == 0 ){
@@ -247,7 +247,7 @@ void menuOpcModArbol()
 
 
 
-nodoArbol* modCatch(nodoArbol* buscadoModif){
+nodoArbol* modArbolCatch(nodoArbol* buscadoModif){
         int op = 99;
 
         while(op !=5)
@@ -277,11 +277,15 @@ nodoArbol* modCatch(nodoArbol* buscadoModif){
           case 5: op = 5;
              break;
             default: printf("No ingresaste un opcion valida \n");
-        printf("Modificar otro valor -----------> \n");
-        }
+
+            }
+                 if(op != 5){
+                    printf("Modificar otro valor ---------------------->\n");
+                }
+
         }
 
-    printf("Este es el nuevo nodo modificado--------->\n");
+    printf("Estos son los valores de paciente modificado--------->\n");
     mostrarSoloNodoArbol(buscadoModif);
     return buscadoModif;
 }
@@ -299,7 +303,7 @@ nodoArbol* modificarSoloNodoArbol(nodoArbol* arbolPac)
     if(buscadoModif !=NULL)
     {
         mostrarSoloNodoArbol(buscadoModif);
-       buscadoModif= modCatch(buscadoModif);
+       buscadoModif= modArbolCatch(buscadoModif);
     }else{
      printf("No se encontro ningun paciente con ese nombre\n");
     }
@@ -328,3 +332,98 @@ nodoArbol* darDeBajaUnPaciente(nodoArbol* arbolPac)
 
     return buscadoDarBaja;
 }
+
+
+void menuOpcListaIngreso(){
+
+        printf("Que valor desea Modificar ? \n");
+        printf("1->Fecha de ingreso\n");
+        printf("2->Fecha de retiro\n");
+        printf("3->Matricula del profesional\n");
+        printf("4->Salir\n");
+        printf("Ingrese la opcion: ");
+
+
+}
+
+
+
+nodoIngreso* modIngresoCatch(nodoIngreso* listaIngreso)
+{
+    int op = 99;
+
+    while(op!=4)
+    {
+        menuOpcListaIngreso();
+        scanf("%i",&op);
+        printf("\n");
+
+        switch(op){
+     case 1: printf("Ingrese nueva fecha de ingreso: ");
+             fflush(stdin);
+             gets(&listaIngreso->Ingreso.FechaIngreso);
+             printf("\n");
+        break;
+     case 2:printf("Ingrese nueva fecha de retiro: ");
+            fflush(stdin);
+            gets(&listaIngreso->Ingreso.FechaRetiro);
+        break;
+     case 3:printf("Ingrese nueva Matricula del solicitante: ");
+            fflush(stdin);
+            scanf("%i",&listaIngreso->Ingreso.MatriculaProfesional);
+        break;
+        case 4: op = 4;
+        break;
+        default: printf("No elijio una opcion correcta \n");
+
+        }
+         if(op != 4)
+          {
+              printf("Modificar otro valor ---------------------->\n");
+          }
+
+    }
+    printf("Estos son los valores del  Ingreso modificado ---------->\n");
+    mostrarSoloUnNodoIngreso(listaIngreso);
+    return listaIngreso;
+}
+
+
+
+
+
+
+
+nodoArbol* modificarSoloNodoIngreso(nodoIngreso* arbolPac)
+{
+    int UnDni;
+    int UnIngreso;
+    nodoArbol* buscarModArbolIngreso = inicArbol();
+    nodoIngreso* buscarModListaIngreso = inicListaDIngreso();
+    printf("Ingrese un Dni a buscar para modificar un ingreso y luego el numero de Ingreso: ");
+    scanf("%i",&UnDni);
+    fflush(stdin);
+    scanf("%i",&UnIngreso);
+
+    buscarModArbolIngreso = buscarNodoArbolPacDni(arbolPac,UnDni,buscarModArbolIngreso);
+
+    if(buscarModArbolIngreso!=NULL)
+    {
+        buscarModListaIngreso = buscarIngreso(buscarModArbolIngreso->listaIngresos,UnIngreso);
+        if(buscarModListaIngreso != NULL )
+        {
+            mostrarSoloUnNodoIngreso(buscarModListaIngreso);
+            buscarModListaIngreso= modIngresoCatch(buscarModListaIngreso);
+
+        }else{
+            printf("No se encontro el ingreso buscado\n");
+        }
+
+    }else{
+
+         printf("No se encontro un paciente con ese dni ");
+    }
+
+    return buscarModArbolIngreso;
+}
+

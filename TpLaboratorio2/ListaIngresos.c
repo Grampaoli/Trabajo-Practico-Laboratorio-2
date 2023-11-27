@@ -37,8 +37,8 @@ nodoIngreso * agregarPpioListaIngreso(nodoIngreso * listaIngreso, nodoIngreso* n
 
     return listaIngreso;
 }
-void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
-{
+
+void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux){
 
     printf("   Datos del ingreso--------\n");
     printf("   Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
@@ -47,6 +47,14 @@ void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
     printf("   Fecha de ingreso: %s\n",nodoAux->Ingreso.FechaIngreso);
     printf("   Fecha de Retiro: %s \n",nodoAux->Ingreso.FechaRetiro);
     printf("   -------------------------------------------------------------------------\n");
+
+}
+
+
+void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
+{
+
+    mostrarSoloUnNodoIngreso(nodoAux);
     mostrarListaPracXingreso(nodoAux->listaPracXingreso);
 
 
@@ -244,3 +252,12 @@ void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados)
 
 
 }
+
+
+
+
+
+
+
+
+
