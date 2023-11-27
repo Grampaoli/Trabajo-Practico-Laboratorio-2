@@ -10,8 +10,10 @@ int main()
         arbolPac = cargarUnPacienteAlNodo(arbolPac);
 
        // arbolPac = modificarSoloNodoIngreso(arbolPac);
-        arbolPac = modificarSoloNodoPractica(arbolPac);
+       // arbolPac = modificarSoloNodoPractica(arbolPac);
+       arbolPac = darBajaIngresoYPrac(arbolPac);
         mostrarUnNodoArbol(arbolPac);
+        printf("[%i]",arbolPac->listaIngresos->Ingreso.Eliminado);
        // arbolPac = modificarSoloNodoArbol(arbolPac);
        // arbolPac = darDeBajaUnPaciente(arbolPac);
 

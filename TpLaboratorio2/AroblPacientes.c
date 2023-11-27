@@ -535,3 +535,42 @@ nodoArbol* modificarSoloNodoPractica(nodoArbol* arbolPac)
 
 
 }
+
+nodoArbol* darBajaIngresoYPrac(nodoArbol* arbolPac)
+{
+
+     int UnDni;
+    int UnIngreso;
+    int UnaPrac;
+    nodoArbol* buscadoModPracArbol = inicArbol();
+    nodoIngreso* buscadoModPracListaIng = inicListaDIngreso();
+
+    printf("Ingrese Dni del paciente a buscar, ingreso ");
+    printf("Dni: ");
+    scanf("%i",&UnDni);
+    printf("Nro ingreso: ");
+    scanf("%i",&UnIngreso);
+
+    buscadoModPracArbol = buscarNodoArbolPacDni(arbolPac,UnDni,buscadoModPracArbol);
+    if(buscadoModPracArbol !=NULL)
+    {
+        buscadoModPracListaIng = buscarIngreso(buscadoModPracArbol->listaIngresos,UnIngreso);
+        if(buscadoModPracListaIng !=NULL)
+        {
+
+                buscadoModPracListaIng->Ingreso.Eliminado = 1;
+
+
+
+        }else{printf("No se ha encontrado el Nro de ingreso\n");}
+
+    }else{printf("No se ha encontrad un paciente con ese dni \n");}
+
+
+
+    return buscadoModPracArbol;
+
+
+
+}
+

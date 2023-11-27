@@ -48,7 +48,7 @@ nodoPracXIngreso * AgregarPpioPracXingreso(nodoPracXIngreso* listaPracXingreso,n
 
 void mostrarUnNodoPrac(nodoPracXIngreso* nodoAux)
 {
-    printf("      Datos de practicas por ingreso-----------\n");
+    printf("      Datos de practicas por ingreso----------->\n");
     printf("      Numero de ingreso: %i\n",nodoAux->practicaXIngreso.NroIngreso);
     printf("      Numero de practica: %i\n",nodoAux->practicaXIngreso.NroPractica);
     printf("      Resultado de la Practica: %s\n",nodoAux->practicaXIngreso.resultado);
