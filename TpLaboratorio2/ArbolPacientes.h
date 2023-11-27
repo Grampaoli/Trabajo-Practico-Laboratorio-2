@@ -43,5 +43,11 @@ void menuOpcListaIngreso();
 nodoIngreso* modIngresoCatch(nodoIngreso* listaIngreso);
 nodoArbol* modificarSoloNodoIngreso(nodoIngreso* arbolPac);
 
+
+
+void menuOpcionListaPrac();
+nodoPracXIngreso* buscarUnNodoPrac(nodoPracXIngreso* listaPrac,int dato);
+nodoPracXIngreso * modCatchPractica(nodoPracXIngreso* buscadoModPracLista);
+nodoArbol* modificarSoloNodoPractica(nodoArbol* arbolPac);
 #endif // ARBOLPACIENTES_H_INCLUDED
 

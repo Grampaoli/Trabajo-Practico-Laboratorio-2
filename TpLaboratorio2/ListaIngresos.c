@@ -40,7 +40,7 @@ nodoIngreso * agregarPpioListaIngreso(nodoIngreso * listaIngreso, nodoIngreso* n
 
 void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux){
 
-    printf("   Datos del ingreso--------\n");
+    printf("   Datos del ingreso----------->\n");
     printf("   Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
     printf("   Dni del Paciente %i\n",nodoAux->Ingreso.DniPaciente);
     printf("   Matricula del profesional: %i\n",nodoAux->Ingreso.MatriculaProfesional);

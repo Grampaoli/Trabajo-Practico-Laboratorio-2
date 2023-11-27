@@ -179,3 +179,5 @@ void mostrarPractica(practicaLab Practicas[],int* validosPracticas)
     }
 
 }
+
+

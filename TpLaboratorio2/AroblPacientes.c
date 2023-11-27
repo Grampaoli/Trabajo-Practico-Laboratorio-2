@@ -402,7 +402,9 @@ nodoArbol* modificarSoloNodoIngreso(nodoIngreso* arbolPac)
     nodoIngreso* buscarModListaIngreso = inicListaDIngreso();
     printf("Ingrese un Dni a buscar para modificar un ingreso y luego el numero de Ingreso: ");
     scanf("%i",&UnDni);
+    printf("\n");
     fflush(stdin);
+    printf("Ingreso: ");
     scanf("%i",&UnIngreso);
 
     buscarModArbolIngreso = buscarNodoArbolPacDni(arbolPac,UnDni,buscarModArbolIngreso);
@@ -427,3 +429,109 @@ nodoArbol* modificarSoloNodoIngreso(nodoIngreso* arbolPac)
     return buscarModArbolIngreso;
 }
 
+
+nodoPracXIngreso* buscarUnNodoPrac(nodoPracXIngreso* listaPrac,int dato)
+{
+    nodoPracXIngreso* seg = listaPrac;
+    nodoIngreso* encontrado = inicListaPracXIngreso();
+    while(seg!=NULL)
+    {
+        if(seg->practicaXIngreso.NroPractica == dato)
+        {
+            encontrado = seg;
+        }
+        seg = seg->siguiente;
+    }
+
+
+    return encontrado;
+}
+
+
+
+void menuOpcionListaPrac()
+{
+    printf("Que valor desea Modificar ? \n");
+        printf("1->Numero de practica\n");
+        printf("2->Resultado\n");
+        printf("3->Salir\n");
+        printf("Ingrese la opcion: ");
+
+}
+
+nodoPracXIngreso * modCatchPractica(nodoPracXIngreso* buscadoModPracLista)
+{
+    int op = 99;
+
+    while(op != 3)
+    {
+
+        menuOpcionListaPrac();
+        scanf("%i",&op);
+        switch(op){
+     case 1:  printf("Ingrese el nuevo numero de practica: ");
+              scanf("%",buscadoModPracLista->practicaXIngreso.NroPractica);
+        break;
+     case 2: printf("Ingrese el nuevo resultado: ");
+             fflush(stdin);
+             gets(&buscadoModPracLista->practicaXIngreso.resultado);
+        break;
+     case 3: op = 3;
+        break;
+     default: printf("No ha ingresado una opcion valida\n");
+
+        }
+        if(op !=3)
+        {
+            printf("Modificar otro valor --------------->\n");
+        }
+    }
+    printf("Este es la nueva practica ingresada -------->\n");
+    mostrarUnNodoPrac(buscadoModPracLista);
+
+    return buscadoModPracLista;
+
+}
+
+
+
+nodoArbol* modificarSoloNodoPractica(nodoArbol* arbolPac)
+{
+    int UnDni;
+    int UnIngreso;
+    int UnaPrac;
+    nodoArbol* buscadoModPracArbol = inicArbol();
+    nodoIngreso* buscadoModPracListaIng = inicListaDIngreso();
+    nodoPracXIngreso* buscadoModPracLista = inicListaPracXIngreso();
+    printf("Ingrese Dni del paciente ingreso y practica que desea modificar\n");
+    printf("Dni: ");
+    scanf("%i",&UnDni);
+    printf("Nro ingreso: ");
+    scanf("%i",&UnIngreso);
+    printf("Nro de practica: ");
+    scanf("%i",&UnaPrac);
+    buscadoModPracArbol = buscarNodoArbolPacDni(arbolPac,UnDni,buscadoModPracArbol);
+    if(buscadoModPracArbol !=NULL)
+    {
+        buscadoModPracListaIng = buscarIngreso(buscadoModPracArbol->listaIngresos,UnIngreso);
+        if(buscadoModPracListaIng !=NULL)
+        {
+            buscadoModPracLista = buscarUnNodoPrac(buscadoModPracListaIng->listaPracXingreso,UnaPrac);
+            if(buscadoModPracLista !=NULL)
+            {
+                mostrarUnNodoPrac(buscadoModPracLista);
+                buscadoModPracLista = modCatchPractica(buscadoModPracLista);
+
+
+            }else{printf("No se ha encontrado esa practica en el ingreso");}
+
+        }else{printf("No se ha encontrado el Nro de ingreso\n");}
+
+    }else{printf("No se ha encontrad un paciente con ese dni \n");}
+
+
+    return buscadoModPracArbol;
+
+
+
+}

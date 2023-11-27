@@ -46,5 +46,5 @@ void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas);
 void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica);
 int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractica);
 void mostrarPractica(practicaLab Practicas[],int* validosPracticas);
-
+nodoPracXIngreso* buscarUnNodoPrac(nodoPracXIngreso* listaPrac,int dato);
 #endif // LISTAPRACXINGRESO_H_INCLUDED

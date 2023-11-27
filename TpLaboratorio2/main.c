@@ -9,8 +9,8 @@ int main()
         nodoArbol* arbolPac = inicArbol();
         arbolPac = cargarUnPacienteAlNodo(arbolPac);
 
-        arbolPac = modificarSoloNodoIngreso(arbolPac);
-
+       // arbolPac = modificarSoloNodoIngreso(arbolPac);
+        arbolPac = modificarSoloNodoPractica(arbolPac);
         mostrarUnNodoArbol(arbolPac);
        // arbolPac = modificarSoloNodoArbol(arbolPac);
        // arbolPac = darDeBajaUnPaciente(arbolPac);
