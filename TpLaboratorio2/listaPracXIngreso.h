@@ -9,6 +9,7 @@
 #define ADMINISTRATIVO "Administrativo"
 #define BIOQUIMICO "Bioquimico"
 #define CANTMAXPRACTICAS 200
+
 typedef struct{
     int NroPract;
     char nombrePract[30];

@@ -6,9 +6,9 @@
 int main()
 {
 
-        //nodoArbol* arbolPac = inicArbol();
-       // arbolPac = cargarUnPacienteAlNodo(arbolPac);
-
+        nodoArbol* arbolPac = inicArbol();
+        arbolPac = cargarUnPacienteAlNodo(arbolPac);
+        arbolPac = modificarSoloNodoArbol(arbolPac);
 
 
        // empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
@@ -21,5 +21,8 @@ int main()
 
        // darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
        // mostrarPractica(PRACTICAS,&validosPracticas);
+
+
+
     return 0;
 }

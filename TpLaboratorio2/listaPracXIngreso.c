@@ -153,7 +153,7 @@ int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractic
 {
     int i = 0;
     int flag = 0;
-    printf("%i",Practicas[i].NroPract);
+
 
     while(i<validos && flag == 0)
     {

@@ -59,9 +59,20 @@ void inOrderArbolPac(nodoArbol* arbolPac)
 
 }
 
+void mostrarSoloNodoArbol(nodoArbol* arbolPac)
+{
+        printf("Datos del paciente---------> \n");
+        printf("Apellido y nombre: %s\n",arbolPac->Paciente.ApellidoYNombe);
+        printf("Edad: %i \n",arbolPac->Paciente.Edad);
+        printf("DNI: %i\n",arbolPac->Paciente.Dni);
+        printf("Direccion: %s\n",arbolPac->Paciente.Direccion);
+        printf("Telefono: %s\n",arbolPac->Paciente.Telefono);
+        printf("-------------------------------------------------------------------------\n");
+}
+
 void mostrarUnNodoArbol(nodoArbol* arbolPac)
 {
-        printf("Datos del paciente------ \n");
+        printf("Datos del paciente---------> \n");
         printf("Apellido y nombre: %s\n",arbolPac->Paciente.ApellidoYNombe);
         printf("Edad: %i \n",arbolPac->Paciente.Edad);
         printf("DNI: %i\n",arbolPac->Paciente.Dni);
@@ -72,17 +83,18 @@ void mostrarUnNodoArbol(nodoArbol* arbolPac)
 
 }
 
-nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,paciente UnPaciente){ //esta funcion busca un nombre segun el critero de ordenamiento haciendo eficiente la busqueda
+nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char UnPaciente[]){ //esta funcion busca un nombre segun el critero de ordenamiento haciendo eficiente la busqueda
 
-nodoArbol * rta=NULL;
+ nodoArbol* rta = NULL;
 
+    printf("%s",arbolPac->Paciente.ApellidoYNombe);
     if(arbolPac!=NULL)
     {
-        if(strcmp(arbolPac->Paciente.ApellidoYNombe,UnPaciente.ApellidoYNombe) == 0 ){
+        if(strcmp(arbolPac->Paciente.ApellidoYNombe,UnPaciente) == 0 ){
             rta = arbolPac;
         }
         else{
-            if(strcmp(UnPaciente.ApellidoYNombe,arbolPac->Paciente.ApellidoYNombe)>0)
+            if(strcmp(UnPaciente,arbolPac->Paciente.ApellidoYNombe)>0)
             {
             rta = buscarNodoArbolPac(arbolPac->der,UnPaciente);
             }
@@ -95,11 +107,9 @@ nodoArbol * rta=NULL;
 
         return rta;
 
-
 }
 
 nodoArbol* buscarNodoArbolPacDni(nodoArbol * arbolPac,int Dni,nodoArbol * rta){
-
 
     if(arbolPac!=NULL)
     {
@@ -114,21 +124,14 @@ nodoArbol* buscarNodoArbolPacDni(nodoArbol * arbolPac,int Dni,nodoArbol * rta){
        rta = buscarNodoArbolPacDni(arbolPac->der,Dni,rta);
 
     }
-
 return rta;
-
 }
 
 nodoArbol* cargarUnPacienteAlNodo(nodoArbol* arbolPac)
 {
-
-
-
     ingreso UnIngreso;
     paciente UnPaciente;
     pracXIngreso UnaPracIng;
-
-
     char seguir = 's';
 
     while(seguir == 's')
@@ -146,8 +149,9 @@ nodoArbol* cargarUnPacienteAlNodo(nodoArbol* arbolPac)
         printf("Desea seguir agregando datos ?\n");
         fflush(stdin);
         scanf("%c",&seguir);
-
     }
+
+    return arbolPac;
 }
 
 
@@ -226,4 +230,74 @@ nodoArbol * ArchToArbol(){
     }
 
     return aux;
+}
+
+void menuOpcModArbol()
+{
+        printf("Que valor desea Modificar ? \n");
+        printf("1->Edad\n");
+        printf("2->Dni\n");
+        printf("3->Direccion\n");
+        printf("4->Telefono\n");
+        printf("5->Salir\n");
+        printf("Ingrese la opcion: ");
+}
+
+nodoArbol* modCatch(nodoArbol* buscadoModif){
+        int op = 99;
+        menuOpcModArbol();
+        while(op !=5)
+        {
+            scanf("%i",&op);
+            printf("\n");
+            switch(op){
+          case 1: printf("Inserte La nueva edad: ");
+                  scanf("%i",&buscadoModif->Paciente.Edad);
+                  printf("\n");
+            break;
+          case 2:printf("Inserte el nuevo dni: ");
+                 scanf("%i",&buscadoModif->Paciente.Dni);
+                 printf("\n");
+            break;
+          case 3:printf("Inserte la nueva direccion: ");
+                 fflush(stdin);
+                 gets(&buscadoModif->Paciente.Direccion);
+                 printf("\n");
+            break;
+          case 4:printf("Ingrese el nuevo telefono: ");
+                 fflush(stdin);
+                 gets(&buscadoModif->Paciente.Telefono);
+                 printf("\n");
+            break;
+          case 5: op = 5;
+             break;
+            default: printf("No ingresaste un opcion valida \n");
+
+        }
+        }
+
+    printf("Este es el nuevo nodo modificado--------->\n");
+    mostrarSoloNodoArbol(buscadoModif);
+    return buscadoModif;
+}
+
+nodoArbol* modificarSoloNodoArbol(nodoArbol* arbolPac)
+{
+    char UnPaciente[20];
+    nodoArbol* buscadoModif = inicArbol();
+
+    printf("Ingrese Nombre y Apellido de paciente a modificar: ");
+    fflush(stdin);
+    gets(&UnPaciente);
+
+    buscadoModif = buscarNodoArbolPac(arbolPac,UnPaciente);
+    if(buscadoModif !=NULL)
+    {
+        mostrarSoloNodoArbol(buscadoModif);
+       buscadoModif= modCatch(buscadoModif);
+    }else{
+     printf("No se encontro ningun paciente con ese nombre\n");
+    }
+
+ return buscadoModif;
 }
