@@ -37,5 +37,7 @@ void menuOpcModArbol();
 nodoArbol* modCatch(nodoArbol* buscadoModif);
 nodoArbol* modificarSoloNodoArbol(nodoArbol* arbolPac);
 
+nodoArbol* darDeBajaUnPaciente(nodoArbol* arbolPac);
+
 #endif // ARBOLPACIENTES_H_INCLUDED
 

@@ -15,7 +15,7 @@ nodoArbol* crearNodoArbol(paciente UnPaciente)
     strcpy(auxArbol->Paciente.Telefono,UnPaciente.Telefono);
     auxArbol->Paciente.Dni = UnPaciente.Dni;
     auxArbol->Paciente.Edad = UnPaciente.Edad;
-    auxArbol->Paciente.Eliminado = UnPaciente.Eliminado;
+    auxArbol->Paciente.Eliminado = 0;
     auxArbol->listaIngresos = inicListaDIngreso();
     auxArbol->der = NULL;
     auxArbol->izq = NULL;
@@ -243,11 +243,16 @@ void menuOpcModArbol()
         printf("Ingrese la opcion: ");
 }
 
+
+
+
+
 nodoArbol* modCatch(nodoArbol* buscadoModif){
         int op = 99;
-        menuOpcModArbol();
+
         while(op !=5)
         {
+            menuOpcModArbol();
             scanf("%i",&op);
             printf("\n");
             switch(op){
@@ -272,7 +277,7 @@ nodoArbol* modCatch(nodoArbol* buscadoModif){
           case 5: op = 5;
              break;
             default: printf("No ingresaste un opcion valida \n");
-
+        printf("Modificar otro valor -----------> \n");
         }
         }
 
@@ -283,7 +288,7 @@ nodoArbol* modCatch(nodoArbol* buscadoModif){
 
 nodoArbol* modificarSoloNodoArbol(nodoArbol* arbolPac)
 {
-    char UnPaciente[20];
+    char UnPaciente[40];
     nodoArbol* buscadoModif = inicArbol();
 
     printf("Ingrese Nombre y Apellido de paciente a modificar: ");
@@ -300,4 +305,26 @@ nodoArbol* modificarSoloNodoArbol(nodoArbol* arbolPac)
     }
 
  return buscadoModif;
+}
+
+
+nodoArbol* darDeBajaUnPaciente(nodoArbol* arbolPac)
+{
+    char UnPaciente[40];
+    nodoArbol* buscadoDarBaja = inicArbol();
+    printf("Ingrese nombre y apellido del apciente a dar de baja: ");
+    fflush(stdin);
+    gets(&UnPaciente);
+    printf("\n");
+    buscadoDarBaja = buscarNodoArbolPac(arbolPac,UnPaciente);
+    if(buscadoDarBaja !=NULL)
+    {
+     buscadoDarBaja->Paciente.Eliminado = 1;
+
+    }else{
+        printf("No se pudo encontrar el paciente a dar de baja\n");
+    }
+
+
+    return buscadoDarBaja;
 }

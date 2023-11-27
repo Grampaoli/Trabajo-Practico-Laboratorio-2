@@ -8,9 +8,9 @@ int main()
 
         nodoArbol* arbolPac = inicArbol();
         arbolPac = cargarUnPacienteAlNodo(arbolPac);
-        arbolPac = modificarSoloNodoArbol(arbolPac);
-
-
+       // arbolPac = modificarSoloNodoArbol(arbolPac);
+        arbolPac = darDeBajaUnPaciente(arbolPac);
+        printf("%i\n",arbolPac->Paciente.Eliminado);
        // empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
        // int* validosEmpleados = 0;
 
