@@ -139,7 +139,7 @@ void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas){
 void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica)
 {
     int i = ultimaPos;
-    while(i>=0 && (UnaPractica.NroPract<Practicas[i].NroPract))
+    while(i>=0 && (strcmp(UnaPractica.nombrePract,Practicas[i].nombrePract)))
     {
         Practicas[i+1] = Practicas[i];
         i--;
@@ -157,7 +157,7 @@ int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractic
 
     while(i<validos && flag == 0)
     {
-        if(Practicas[i].NroPract == UnaPractica.NroPract)
+        if(Practicas[i].nombrePract == UnaPractica.nombrePract)
         {
             flag = 1;
         }
@@ -179,5 +179,6 @@ void mostrarPractica(practicaLab Practicas[],int* validosPracticas)
     }
 
 }
+
 
 

@@ -52,5 +52,12 @@ nodoArbol* modificarSoloNodoPractica(nodoArbol* arbolPac);
 
 
 nodoArbol* darBajaIngresoYPrac(nodoArbol* arbolPac);
+
+void recorrerListaPrac(nodoPracXIngreso* listaPrac,int UnaPrac,int* flag);
+void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* flag);
+void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag);
+void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas);
+
+
 #endif // ARBOLPACIENTES_H_INCLUDED
 

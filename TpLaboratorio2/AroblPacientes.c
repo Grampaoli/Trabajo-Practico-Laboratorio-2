@@ -541,7 +541,6 @@ nodoArbol* darBajaIngresoYPrac(nodoArbol* arbolPac)
 
      int UnDni;
     int UnIngreso;
-    int UnaPrac;
     nodoArbol* buscadoModPracArbol = inicArbol();
     nodoIngreso* buscadoModPracListaIng = inicListaDIngreso();
 
@@ -571,6 +570,90 @@ nodoArbol* darBajaIngresoYPrac(nodoArbol* arbolPac)
     return buscadoModPracArbol;
 
 
+
+}
+
+void recorrerListaPrac(nodoPracXIngreso* listaPrac,int UnaPrac,int* flag)
+{
+    nodoPracXIngreso* seg = listaPrac;
+
+    printf("3-[%i]",(*flag));
+    while(seg !=NULL && (*flag) == 0)
+    {
+        if(seg->practicaXIngreso.NroPractica == UnaPrac)
+        {
+            (*flag)= 1;
+
+        }
+        seg = seg->siguiente;
+    }
+
+
+}
+
+
+
+
+void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* flag)
+{
+    nodoIngreso* seg = listaIngreso;
+
+    printf("2-[%i]",(*flag));
+    while(seg !=NULL && (*flag) == 0 )
+    {
+        recorrerListaPrac(seg->listaPracXingreso,UnaPrac,flag);
+        seg = seg->siguiente;
+
+    }
+
+
+}
+
+
+
+
+void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag)
+{
+
+    printf("1-[%i]",(*flag));
+    if(arbolPac !=NULL && (*flag) == 0)
+    {
+
+        recorrerListaIngresoYbuscarPrac(arbolPac->listaIngresos,UnaPrac,flag);
+        recorrerArbolYbuscarPrac(arbolPac->izq,UnaPrac,flag);
+        recorrerArbolYbuscarPrac(arbolPac->der,UnaPrac,flag);
+
+    }
+
+}
+
+
+
+
+
+
+
+void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas)
+{
+    int i = 0; int UnaPractica;
+    printf("Ingrese Numero de practica a dar de baja: \n");
+    fflush(stdin);
+    scanf("%i",&UnaPractica);
+    int flag = 0;
+
+
+    recorrerArbolYbuscarPrac(arbolPac,UnaPractica,&flag);
+
+    while(i<(*validosPracticas))
+    {
+
+        if((Practicas[i].NroPract == UnaPractica && (flag) == 0))
+        {
+            Practicas[i].Eliminado = 1;
+        }
+
+        i++;
+    }
 
 }
 
