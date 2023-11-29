@@ -255,9 +255,48 @@ void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados)
 
 
 
+void empleadosToArch(empleadoLab Empleados[],int validosEmpleados)
+{
+    FILE* archE = fopen("Empleados","wb");
+     empleadoLab UnEmpleado;
+    if(archE !=NULL)
+    {
+        for(int i = 0;i<validosEmpleados;i++)
+        {
+            UnEmpleado.DniEmpleado = Empleados[i].DniEmpleado;
+            strcpy(&UnEmpleado.ApellidoYnombreEmpleado,Empleados[i].ApellidoYnombreEmpleado);
+            strcpy(&UnEmpleado.Contrasena,Empleados[i].Contrasena);
+            strcpy(&UnEmpleado.perfil,Empleados[i].perfil);
+            strcpy(&UnEmpleado.Usuario,Empleados[i].Usuario);
+
+            fwrite(&UnEmpleado,sizeof(empleadoLab),1,archE);
+        }
+
+    }
+
+    fclose(archE);
+}
 
 
+void archToEmpleado(empleadoLab Empleados[],int* validosEmpleados)
+{
+    FILE* archE = fopen("Empleados","rb");
+    empleadoLab UnEmpleado;
+    if(archE !=NULL)
+    {
+        while(fread(&UnEmpleado,sizeof(empleadoLab),1,archE)>0)
+        {
+            Empleados[(*validosEmpleados)].DniEmpleado = UnEmpleado.DniEmpleado;
+            strcpy(Empleados[(*validosEmpleados)].ApellidoYnombreEmpleado,&UnEmpleado.ApellidoYnombreEmpleado);
+            strcpy(Empleados[(*validosEmpleados)].Contrasena,&UnEmpleado.Contrasena);
+            strcpy(Empleados[(*validosEmpleados)].perfil,&UnEmpleado.perfil);
+            strcpy(Empleados[(*validosEmpleados)].Usuario,&UnEmpleado.Usuario);
+            (*validosEmpleados)++;
+        }
 
+    }
 
+    fclose(archE);
+}
 
 

@@ -56,6 +56,9 @@ int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado)
 void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados);
 
 
+void empleadosToArch(empleadoLab Empleados[],int validosEmpleados);
+void archToEmpleado(empleadoLab Empleados[],int* validosEmpleados);
+
 
 
 

@@ -10,18 +10,10 @@ int main()
         ArchToPrac(PRACTICAS,&validosPracticas);
 
 
+       //darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
+       // persistirPracticas(PRACTICAS,validosPracticas);
 
-       darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
-        persistirPracticas(PRACTICAS,validosPracticas);
-
-        mostrarPractica(PRACTICAS,&validosPracticas);
-
-
-
-
-
-
-
+        //mostrarPractica(PRACTICAS,&validosPracticas);
 
       //  nodoArbol* arbolPac = inicArbol();
       // arbolPac = cargarUnPacienteAlNodo(arbolPac);
@@ -34,13 +26,13 @@ int main()
        // arbolPac = modificarSoloNodoArbol(arbolPac);
        // arbolPac = darDeBajaUnPaciente(arbolPac);
 
-       // empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
-       // int* validosEmpleados = 0;
-
+        empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
+        int* validosEmpleados = 0;
+        archToEmpleado(EMPLEADOS,&validosEmpleados);
        // darAltaAgregarUnEmpleado(EMPLEADOS,&validosEmpleados);
-       // mostrarEmpleados(EMPLEADOS,&validos);
-
-    // darDeBajaUnaPractica(arbolPac,PRACTICAS,&validosPracticas);
+        mostrarEmpleados(EMPLEADOS,&validosEmpleados);
+       // empleadosToArch(EMPLEADOS,validosEmpleados);
+  //  darDeBajaUnaPractica(arbolPac,PRACTICAS,&validosPracticas);
 
 
     return 0;

@@ -77,7 +77,7 @@ void ArchToPrac(practicaLab Practicas[],int* validosPracticas)
 
 
     if(arch != NULL){
-        printf("%i",(*validosPracticas));
+
         while(fread(&auxPr,sizeof(practicaLab),1,arch)>0)
         {
 
