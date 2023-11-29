@@ -69,27 +69,29 @@ void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso)
 
 
 
-int ArchToPrac(practicaLab Practicas[])
+void ArchToPrac(practicaLab Practicas[],int* validosPracticas)
 {
-    FILE* arch = fopen("lasPracticas","rb");
-    int validos = 0;
+    FILE* arch = fopen("las_Practicas","rb");
+
     practicaLab auxPr;
 
 
     if(arch != NULL){
-
+        printf("%i",(*validosPracticas));
         while(fread(&auxPr,sizeof(practicaLab),1,arch)>0)
         {
 
-            Practicas[validos] = auxPr;
-            validos++;
+            Practicas[(*validosPracticas)].NroPract = auxPr.NroPract;
+            strcpy(Practicas[(*validosPracticas)].nombrePract,&auxPr.nombrePract);
+            Practicas[(*validosPracticas)].Eliminado = auxPr.Eliminado;
+            (*validosPracticas)++;
         }
     }
 
-    fclose(fclose);
+    fclose(arch);
 
 
-    return validos;
+
 }
 
 
@@ -139,7 +141,7 @@ void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas){
 void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica)
 {
     int i = ultimaPos;
-    while(i>=0 && (strcmp(UnaPractica.nombrePract,Practicas[i].nombrePract)))
+    while(i>=0 && (strcmp(UnaPractica.nombrePract,Practicas[i].nombrePract)<0))
     {
         Practicas[i+1] = Practicas[i];
         i--;
@@ -181,4 +183,31 @@ void mostrarPractica(practicaLab Practicas[],int* validosPracticas)
 }
 
 
+void persistirPracticas(practicaLab Practicas[],int validos)
+{
+    FILE *arch = fopen("Las_Practicas", "wb");
 
+     practicaLab UnaPrac;
+
+    if(arch != NULL)
+    {
+
+        for(int i = 0;i<validos;i++)
+        {
+
+
+            UnaPrac.NroPract = Practicas[i].NroPract;
+            strcpy(&UnaPrac.nombrePract,Practicas[i].nombrePract);
+            printf("%s",UnaPrac.nombrePract);
+            UnaPrac.Eliminado = Practicas[i].Eliminado;
+         fwrite(&UnaPrac,sizeof(practicaLab),1,arch);
+        }
+
+    }else{
+
+     printf("No se abrio el archivo");
+    }
+
+  fclose(arch);
+
+}

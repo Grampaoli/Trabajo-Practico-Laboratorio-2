@@ -5,9 +5,26 @@
 
 int main()
 {
+        practicaLab PRACTICAS[CANTMAXPRACTICAS];
+        int* validosPracticas = 0;
+        ArchToPrac(PRACTICAS,&validosPracticas);
 
-        nodoArbol* arbolPac = inicArbol();
-       arbolPac = cargarUnPacienteAlNodo(arbolPac);
+
+
+       darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
+        persistirPracticas(PRACTICAS,validosPracticas);
+
+        mostrarPractica(PRACTICAS,&validosPracticas);
+
+
+
+
+
+
+
+
+      //  nodoArbol* arbolPac = inicArbol();
+      // arbolPac = cargarUnPacienteAlNodo(arbolPac);
 
        // arbolPac = modificarSoloNodoIngreso(arbolPac);
        // arbolPac = modificarSoloNodoPractica(arbolPac);
@@ -22,14 +39,9 @@ int main()
 
        // darAltaAgregarUnEmpleado(EMPLEADOS,&validosEmpleados);
        // mostrarEmpleados(EMPLEADOS,&validos);
-        practicaLab PRACTICAS[CANTMAXPRACTICAS];
-        int* validosPracticas = 0;
 
-       darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
-        mostrarPractica(PRACTICAS,&validosPracticas);
+    // darDeBajaUnaPractica(arbolPac,PRACTICAS,&validosPracticas);
 
-    darDeBajaUnaPractica(arbolPac,PRACTICAS,&validosPracticas);
-    printf("%i",PRACTICAS[0].Eliminado);
 
     return 0;
 }

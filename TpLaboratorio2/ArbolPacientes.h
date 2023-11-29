@@ -20,6 +20,14 @@ struct nodoArbol* der;
 }nodoArbol;
 
 
+typedef struct{
+
+    paciente UnPaciente;
+    ingreso UnIngreso;
+    practicaLab UnaPractica;
+
+}pacienteDatos;
+
 
 nodoArbol* inicArbol();
 nodoArbol* crearNodoArbol(paciente Paciente);

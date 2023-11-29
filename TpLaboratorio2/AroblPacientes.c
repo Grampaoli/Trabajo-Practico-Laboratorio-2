@@ -321,7 +321,7 @@ nodoArbol* darDeBajaUnPaciente(nodoArbol* arbolPac)
     gets(&UnPaciente);
     printf("\n");
     buscadoDarBaja = buscarNodoArbolPac(arbolPac,UnPaciente);
-    if(buscadoDarBaja !=NULL)
+    if(buscadoDarBaja !=NULL && buscadoDarBaja->listaIngresos !=NULL)
     {
      buscadoDarBaja->Paciente.Eliminado = 1;
 
@@ -342,8 +342,6 @@ void menuOpcListaIngreso(){
         printf("3->Matricula del profesional\n");
         printf("4->Salir\n");
         printf("Ingrese la opcion: ");
-
-
 }
 
 
@@ -577,7 +575,7 @@ void recorrerListaPrac(nodoPracXIngreso* listaPrac,int UnaPrac,int* flag)
 {
     nodoPracXIngreso* seg = listaPrac;
 
-    printf("3-[%i]",(*flag));
+
     while(seg !=NULL && (*flag) == 0)
     {
         if(seg->practicaXIngreso.NroPractica == UnaPrac)
@@ -598,7 +596,7 @@ void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* 
 {
     nodoIngreso* seg = listaIngreso;
 
-    printf("2-[%i]",(*flag));
+
     while(seg !=NULL && (*flag) == 0 )
     {
         recorrerListaPrac(seg->listaPracXingreso,UnaPrac,flag);
@@ -615,7 +613,7 @@ void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* 
 void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag)
 {
 
-    printf("1-[%i]",(*flag));
+
     if(arbolPac !=NULL && (*flag) == 0)
     {
 

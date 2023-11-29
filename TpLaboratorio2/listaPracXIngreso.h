@@ -15,7 +15,7 @@
 
 typedef struct{
     int NroPract;
-    char nombrePract[30];
+    char nombrePract[60];
     int Eliminado;
 }practicaLab;
 
@@ -40,7 +40,7 @@ nodoPracXIngreso * crearNodoPracXingreso(pracXIngreso PracticasXingreso);
 nodoPracXIngreso * AgregarPpioPracXingreso(nodoPracXIngreso* listaPracXingreso,nodoPracXIngreso * nuevoNodoPracIngreso);
 void mostrarUnNodoPrac(nodoPracXIngreso* nodoAux);
 void mostrarListaPracXingreso(nodoPracXIngreso* listaIngreso);
-int ArchToPrac(practicaLab Practicas[]);
+void ArchToPrac(practicaLab Practicas[],int* validos);
 
 void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas);
 void insertarOPractica(practicaLab Practicas[],int ultimaPos,practicaLab UnaPractica);
