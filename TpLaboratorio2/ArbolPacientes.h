@@ -24,7 +24,7 @@ typedef struct{
 
     paciente UnPaciente;
     ingreso UnIngreso;
-    practicaLab UnaPractica;
+    pracXIngreso UnaPractica;
 
 }pacienteDatos;
 
@@ -66,6 +66,14 @@ void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* 
 void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag);
 void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas);
 
+void guardarArbolEnArch(nodoArbol* arbolPac,FILE* archA);
+void recorrerYescribirEnArbol(nodoArbol* arbolPac,FILE* archA);
+void persistirDatosDelArbol(nodoArbol* arbolPac);
+
+nodoArbol* guardarDatosArchiEnArbol(nodoArbol* arbolPac);
+
+void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int validosPracticas);
+void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpleados,practicaLab Practicas[],int validosPracticas);
 
 #endif // ARBOLPACIENTES_H_INCLUDED
 

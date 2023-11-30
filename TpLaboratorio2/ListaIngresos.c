@@ -223,7 +223,7 @@ int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado)
     while(i<validos && flag == 0)
     {
 
-        if(strcasecmp(Empleados[i].ApellidoYnombreEmpleado,UnEmpleado.ApellidoYnombreEmpleado)== 0)
+        if(strcmp(Empleados[i].ApellidoYnombreEmpleado,UnEmpleado.ApellidoYnombreEmpleado)== 0)
         {
             flag = 1;
         }
@@ -300,3 +300,27 @@ void archToEmpleado(empleadoLab Empleados[],int* validosEmpleados)
 }
 
 
+empleadoLab buscarUnEmpleadoYConstrasena(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado,int* flag)
+{
+  int i = 0;
+
+
+    while(i<validos && (*flag) == 0)
+    {
+
+        if((strcmp(Empleados[i].Usuario,UnEmpleado.Usuario)== 0)&&(strcmp(Empleados[i].Contrasena,UnEmpleado.Contrasena)== 0))
+        {
+            strcpy(&UnEmpleado.ApellidoYnombreEmpleado,Empleados[i].ApellidoYnombreEmpleado);
+            strcpy(&UnEmpleado.perfil,Empleados[i].perfil);
+            strcpy(&UnEmpleado.Contrasena,Empleados[i].Contrasena);
+            strcpy(&UnEmpleado.Usuario,Empleados[i].Usuario);
+             UnEmpleado.DniEmpleado = UnEmpleado.DniEmpleado;
+
+            (*flag) = 1;
+        }
+
+     i++;
+    }
+
+  return UnEmpleado;
+}

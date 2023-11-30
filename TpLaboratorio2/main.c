@@ -5,34 +5,48 @@
 
 int main()
 {
+
+    // ESTAS FUNCIONES SON NECESARIAS PARA EL CORRECTO FUNCIONAMIENTO DEL SISTEMA
         practicaLab PRACTICAS[CANTMAXPRACTICAS];
         int* validosPracticas = 0;
-        ArchToPrac(PRACTICAS,&validosPracticas);
+        ArchToPrac(PRACTICAS,&validosPracticas); //CARGA LAS PRACTICAS GUARDADAS
 
+        empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
+        int* validosEmpleados = 0;
+        archToEmpleado(EMPLEADOS,&validosEmpleados); // CARGA LOS EMPLEADOS GUARDADOS
 
-       //darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
+        nodoArbol* arbolPac = inicArbol();
+        arbolPac = guardarDatosArchiEnArbol(arbolPac);
+
+        checkearUsuario(arbolPac,EMPLEADOS,validosEmpleados,PRACTICAS,validosPracticas);
+
+   //------------------------------------------------------------------->
+
+      // darAltaAgregarUnaPractica(PRACTICAS,&validosPracticas);
        // persistirPracticas(PRACTICAS,validosPracticas);
 
-        //mostrarPractica(PRACTICAS,&validosPracticas);
+       // mostrarPractica(PRACTICAS,&validosPracticas);
 
-      //  nodoArbol* arbolPac = inicArbol();
+
       // arbolPac = cargarUnPacienteAlNodo(arbolPac);
+
+       // persistirDatosDelArbol(arbolPac);
 
        // arbolPac = modificarSoloNodoIngreso(arbolPac);
        // arbolPac = modificarSoloNodoPractica(arbolPac);
       // arbolPac = darBajaIngresoYPrac(arbolPac);
-     //   mostrarUnNodoArbol(arbolPac);
+      // mostrarUnNodoArbol(arbolPac);
 
        // arbolPac = modificarSoloNodoArbol(arbolPac);
        // arbolPac = darDeBajaUnPaciente(arbolPac);
 
-        empleadoLab EMPLEADOS[CANTMAXEMPLEADOS];
-        int* validosEmpleados = 0;
-        archToEmpleado(EMPLEADOS,&validosEmpleados);
+
        // darAltaAgregarUnEmpleado(EMPLEADOS,&validosEmpleados);
-        mostrarEmpleados(EMPLEADOS,&validosEmpleados);
+       // mostrarEmpleados(EMPLEADOS,&validosEmpleados);
+
        // empleadosToArch(EMPLEADOS,validosEmpleados);
   //  darDeBajaUnaPractica(arbolPac,PRACTICAS,&validosPracticas);
+
 
 
     return 0;

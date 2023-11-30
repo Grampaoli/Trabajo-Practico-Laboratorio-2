@@ -627,10 +627,6 @@ void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag)
 
 
 
-
-
-
-
 void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas)
 {
     int i = 0; int UnaPractica;
@@ -652,6 +648,132 @@ void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* valid
 
         i++;
     }
+
+}
+
+
+
+
+
+void guardarArbolEnArch(nodoArbol* arbolPac,FILE* archA)
+{
+    pacienteDatos UnPacienteDato;
+    // datos del paciente
+    strcpy(&UnPacienteDato.UnPaciente.ApellidoYNombe,arbolPac->Paciente.ApellidoYNombe);
+    UnPacienteDato.UnPaciente.Dni = arbolPac->Paciente.Dni;
+    strcpy(&UnPacienteDato.UnPaciente.Direccion,arbolPac->Paciente.Direccion);
+    UnPacienteDato.UnPaciente.Edad = arbolPac->Paciente.Edad;
+    UnPacienteDato.UnPaciente.Eliminado = arbolPac->Paciente.Eliminado;
+    strcpy(&UnPacienteDato.UnPaciente.Telefono,arbolPac->Paciente.Telefono);
+    //datos del ingreso
+    UnPacienteDato.UnIngreso.DniPaciente = arbolPac->listaIngresos->Ingreso.DniPaciente;
+    UnPacienteDato.UnIngreso.Eliminado = arbolPac->listaIngresos->Ingreso.Eliminado;
+    strcpy(&UnPacienteDato.UnIngreso.FechaIngreso,arbolPac->listaIngresos->Ingreso.FechaIngreso);
+    strcpy(&UnPacienteDato.UnIngreso.FechaRetiro,arbolPac->listaIngresos->Ingreso.FechaRetiro);
+    UnPacienteDato.UnIngreso.MatriculaProfesional = arbolPac->listaIngresos->Ingreso.MatriculaProfesional;
+    UnPacienteDato.UnIngreso.NroIngreso = arbolPac->listaIngresos->Ingreso.NroIngreso;
+
+    //datos de las prac
+    UnPacienteDato.UnaPractica.NroIngreso = arbolPac->listaIngresos->listaPracXingreso->practicaXIngreso.NroIngreso;
+    UnPacienteDato.UnaPractica.NroPractica = arbolPac->listaIngresos->listaPracXingreso->practicaXIngreso.NroPractica;
+    strcpy(&UnPacienteDato.UnaPractica.resultado,arbolPac->listaIngresos->listaPracXingreso->practicaXIngreso.resultado);
+
+    fwrite(&UnPacienteDato,sizeof(pacienteDatos),1,archA);
+}
+
+
+void recorrerYescribirEnArbol(nodoArbol* arbolPac,FILE* archA)
+{
+    if(arbolPac !=NULL)
+    {
+        guardarArbolEnArch(arbolPac,archA);
+        recorrerYescribirEnArbol(arbolPac->izq,archA);
+        recorrerYescribirEnArbol(arbolPac->der,archA);
+
+    }
+
+}
+
+
+void persistirDatosDelArbol(nodoArbol* arbolPac)
+{
+
+    FILE* archA = fopen("arbolPacientes","wb");
+
+    if(archA!=NULL)
+    {
+        recorrerYescribirEnArbol(arbolPac,archA);
+
+    }
+
+    fclose(archA);
+
+
+}
+
+nodoArbol* guardarDatosArchiEnArbol(nodoArbol* arbolPac)
+{
+
+    pacienteDatos UnPacienteDato;
+    FILE* archA = fopen("arbolPacientes","rb");
+
+    if(archA !=NULL)
+    {
+        while(fread(&UnPacienteDato,sizeof(UnPacienteDato),1,archA)>0)
+        {
+           arbolPac = AltaDePacienteIngresar(arbolPac,UnPacienteDato.UnPaciente,UnPacienteDato.UnIngreso,UnPacienteDato.UnaPractica);
+        }
+
+    }
+    fclose(archA);
+
+   return arbolPac;
+}
+
+void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int validosPracticas)
+{
+
+    printf("Se ingreso al sistema");
+
+
+}
+
+
+void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpleados,practicaLab Practicas[],int validosPracticas)
+{
+    empleadoLab UnEmpleado;int * flag = 0;
+    printf("Ingrese Usuario: ");
+    fflush(stdin);
+    gets(&UnEmpleado.Usuario);
+    printf("Ingrese contraseña: ");
+    fflush(stdin);
+    gets(&UnEmpleado.Contrasena);
+
+
+
+    UnEmpleado = buscarUnEmpleadoYConstrasena(Empleados,validosEmpleados,UnEmpleado,&flag);
+
+    while( flag == 0)
+    {
+        printf("Usuario o contraseña no es valido \n");
+        printf("Ingrese Usuario: ");
+        fflush(stdin);
+        gets(&UnEmpleado.Usuario);
+        printf("Ingrese contraseña: ");
+        fflush(stdin);
+        gets(&UnEmpleado.Contrasena);
+
+       printf("%i",(*flag));
+        UnEmpleado = buscarUnEmpleadoYConstrasena(Empleados,validosEmpleados,UnEmpleado,&flag);
+
+
+    }
+
+    if(flag==1)
+        {
+            ingresarSistema(arbolPac,UnEmpleado,Practicas,validosPracticas);
+        }
+
 
 }
 

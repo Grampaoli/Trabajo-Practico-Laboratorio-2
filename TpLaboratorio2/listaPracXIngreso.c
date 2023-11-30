@@ -159,7 +159,7 @@ int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractic
 
     while(i<validos && flag == 0)
     {
-        if(Practicas[i].nombrePract == UnaPractica.nombrePract)
+        if(Practicas[i].nombrePract == UnaPractica.nombrePract && Practicas[i].Eliminado == 0)
         {
             flag = 1;
         }

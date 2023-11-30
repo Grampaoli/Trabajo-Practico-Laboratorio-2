@@ -59,6 +59,8 @@ void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados);
 void empleadosToArch(empleadoLab Empleados[],int validosEmpleados);
 void archToEmpleado(empleadoLab Empleados[],int* validosEmpleados);
 
+empleadoLab buscarUnEmpleadoYConstrasena(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado,int* flag);
+
 
 
 
