@@ -27,6 +27,19 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Laboratorio">
+				<Option output="bin/Laboratorio/TpLaboratorio2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Laboratorio/" />
+				<Option object_output="obj/Laboratorio/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -39,6 +52,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ListaIngresos.h" />
+		<Unit filename="TpLaboratorio.exe">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="listaPracXIngreso.c">
 			<Option compilerVar="CC" />
 		</Unit>
