@@ -206,18 +206,7 @@ nodoArbol* AltaDePacienteIngresar(nodoArbol* arbolPac,paciente UnPaciente,ingres
 
 }
 
-void arbolAArchivo(nodoArbol* arbol)
-{
-    FILE* archArbol = fopen("arbol.bin","w+b");
 
-    if(archArbol !=NULL)
-    {
-        fwrite(arbol,sizeof(nodoArbol*),1,archArbol);
-
-    }
-
-    fclose(archArbol);
-}
 
 
 nodoArbol * ArchToArbol(){
@@ -851,10 +840,6 @@ void sistemaModoAdministrativo(nodoArbol* arbolPac,empleadoLab UnEmpleado,practi
 
 
 
-
-
-
-
 void menuDeSistemaTecnico()
 {
     printf("1->Mostrar todos los pacientes con sus ingresos y practicas\n");
@@ -871,7 +856,6 @@ void menuDeSistemaTecnico()
     printf("12->Salir\n");
 
 }
-
 
 void sistemaModoTecnico(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE)
 {

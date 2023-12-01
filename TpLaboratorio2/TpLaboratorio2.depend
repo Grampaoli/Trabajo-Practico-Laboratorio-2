@@ -2,7 +2,7 @@
 1701391456 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.c
 	"listaPracXIngreso.h"
 
-1701391226 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.h
+1701409272 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listapracxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	"string.h"
@@ -17,13 +17,13 @@
 	"ListaIngresos.h"
 	"listaPracXIngreso.h"
 
-1701397884 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\arbolpacientes.h
+1701409272 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\arbolpacientes.h
 	"listaPracXIngreso.h"
 	"ListaIngresos.h"
 
-1701399919 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.h
+1701409272 c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.h
 	"listaPracXIngreso.h"
 
-1701400099 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.c
+1701400997 source:c:\users\user\desktop\trabajo practico laboratorio 2\trabajo-practico-laboratorio-2\tplaboratorio2\listaingresos.c
 	"ListaIngresos.h"
 
