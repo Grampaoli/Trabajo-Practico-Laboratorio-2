@@ -257,7 +257,6 @@ void modificarUnEmpleado(empleadoLab Empleados[],int validos)
     gets(&UnEmpleado.ApellidoYnombreEmpleado);
 
     flag = buscarUnEmpleado(Empleados,validos,UnEmpleado);
-    printf("%i",flag);
     if(flag == 1)
     {
         while(i<validos && opaux != 5)
@@ -265,8 +264,9 @@ void modificarUnEmpleado(empleadoLab Empleados[],int validos)
 
             if(strcmp(Empleados[i].ApellidoYnombreEmpleado,UnEmpleado.ApellidoYnombreEmpleado)==0)
             {
-                printf("Ingrese la opcion que desea modificar: ");
+
                 menuOpcionesModEmpleado();
+                printf("Ingrese la opcion que desea modificar: ");
                 scanf("%i",&opaux);
                 switch(opaux)
                 {

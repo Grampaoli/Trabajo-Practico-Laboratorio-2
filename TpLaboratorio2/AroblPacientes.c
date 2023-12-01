@@ -1131,6 +1131,8 @@ void sistemaModoAdministrador(nodoArbol* arbolPac,empleadoLab UnEmpleado,practic
                 {
                     arbolPac = auxiliar;
                 }
+                system("pause");
+                 system("cls");
             break;
         case 10:    auxiliar = darBajaIngresoYPrac(arbolPac);
                     if(auxiliar !=NULL)
@@ -1169,6 +1171,8 @@ void sistemaModoAdministrador(nodoArbol* arbolPac,empleadoLab UnEmpleado,practic
         case 17: op = 17;
             break;
        default: printf("Por favor ingrese una opcion valida\n");
+                system("pause");
+                 system("cls");
 
         }
     }
