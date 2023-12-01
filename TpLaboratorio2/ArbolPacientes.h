@@ -32,9 +32,9 @@ typedef struct{
 nodoArbol* inicArbol();
 nodoArbol* crearNodoArbol(paciente Paciente);
 nodoArbol* insertarNodoArbol(nodoArbol* arbolPac, nodoArbol* nuevoNodo); //Para comparar cadenas -1 si la primera menor 1 si la primera mayor y 0 si son iguales (siendo a menor y z mayor de todas)
-void inOrderArbolPac(nodoArbol* arbolPac);
+void inOrderArbolPac(nodoArbol* arbolPac,empleadoLab UnEmpleado);
 void mostrarSoloNodoArbol(nodoArbol* arbolPac);
-void mostrarUnNodoArbol(nodoArbol* arbolAux);
+void mostrarUnNodoArbol(nodoArbol* arbolAux,empleadoLab UnEmpleado);
 paciente crearUnPaciente(paciente UnPaciente);
 nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char UnPaciente[]);
 nodoArbol* buscarNodoArbolPacDni(nodoArbol * arbolPac,int Dni,nodoArbol* rta);
@@ -64,7 +64,7 @@ nodoArbol* darBajaIngresoYPrac(nodoArbol* arbolPac);
 void recorrerListaPrac(nodoPracXIngreso* listaPrac,int UnaPrac,int* flag);
 void recorrerListaIngresoYbuscarPrac(nodoIngreso* listaIngreso,int UnaPrac,int* flag);
 void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag);
-void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas);
+void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int validosPracticas);
 
 void guardarArbolEnArch(nodoArbol* arbolPac,FILE* archA);
 void recorrerYescribirEnArbol(nodoArbol* arbolPac,FILE* archA);
@@ -72,8 +72,16 @@ void persistirDatosDelArbol(nodoArbol* arbolPac);
 
 nodoArbol* guardarDatosArchiEnArbol(nodoArbol* arbolPac);
 
-void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int validosPracticas);
-void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpleados,practicaLab Practicas[],int validosPracticas);
+void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosPracticas,empleadoLab Empleados[],int* validosEmpleados);
+void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int* validosEmpleados,practicaLab Practicas[],int* validosPracticas);
 
+
+void sistemaModoAdministrativo(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE);
+
+void menuDeSistemaTecnico();
+void sistemaModoTecnico(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE);
+
+void menuDeSistemaAdministrador();
+void sistemaModoAdministrador(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosPracticas,empleadoLab Empleados[],int* validosEmpleados);
 #endif // ARBOLPACIENTES_H_INCLUDED
 

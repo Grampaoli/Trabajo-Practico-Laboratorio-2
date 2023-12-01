@@ -41,8 +41,8 @@ nodoIngreso* inicListaDIngreso();
 nodoIngreso* crearNodoDIngreso(ingreso UnIngreso);
 nodoIngreso* agregarPpioListaIngreso(nodoIngreso* listaIngreso, nodoIngreso * nuevoNodoIngreso);
 void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux);
-void mostrarUnNOdoIngreso(nodoIngreso * nodoAux);
-void mostrarListaIngreso(nodoIngreso * listaIngreso);
+void mostrarUnNOdoIngreso(nodoIngreso * nodoAux,empleadoLab UnEmpleado);
+void mostrarListaIngreso(nodoIngreso * listaIngreso,empleadoLab UnEmpleado);
 nodoIngreso* buscarIngreso(nodoIngreso* listaIngreso,int dato);
 nodoIngreso* altaDeIngreso(nodoIngreso* listaIngreso,ingreso UnIngreso,pracXIngreso UnaPracIng);
 ingreso crearIngreso(ingreso UnIngreso);
@@ -53,13 +53,17 @@ empleadoLab crearEmpleado();
 void darAltaAgregarUnEmpleado(empleadoLab Empleados[],int* validosEmpleados);
 void insertarEmpleado(empleadoLab Empleados[],int ultimaPos,empleadoLab UnEmpleado);
 int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado);
-void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados);
+
+void modificarUnEmpleado(empleadoLab Empleados[],int validos);
+void mostrarEmpleados(empleadoLab Empleados[],int validosEmpleados,empleadoLab UnEmpleado);
 
 
 void empleadosToArch(empleadoLab Empleados[],int validosEmpleados);
 void archToEmpleado(empleadoLab Empleados[],int* validosEmpleados);
 
 empleadoLab buscarUnEmpleadoYConstrasena(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado,int* flag);
+
+void mostrarPractica(practicaLab Practicas[],int validosPracticas,empleadoLab UnEmpleado);
 
 
 

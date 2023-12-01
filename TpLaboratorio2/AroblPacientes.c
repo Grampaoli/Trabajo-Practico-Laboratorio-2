@@ -45,15 +45,15 @@ nodoArbol* insertarNodoArbol(nodoArbol* arbolPac,nodoArbol *nuevoNodo){
 }
 
 
-void inOrderArbolPac(nodoArbol* arbolPac)
+void inOrderArbolPac(nodoArbol* arbolPac,empleadoLab UnEmpleado)
 {
 
     if(arbolPac !=NULL)
     {
 
-        inOrderArbolPac(arbolPac->izq);
-        mostrarUnNodoArbol(arbolPac);
-        inOrderArbolPac(arbolPac->der);
+        inOrderArbolPac(arbolPac->izq,UnEmpleado);
+        mostrarUnNodoArbol(arbolPac,UnEmpleado);
+        inOrderArbolPac(arbolPac->der,UnEmpleado);
 
     }
 
@@ -70,8 +70,10 @@ void mostrarSoloNodoArbol(nodoArbol* arbolPac)
         printf("-------------------------------------------------------------------------\n");
 }
 
-void mostrarUnNodoArbol(nodoArbol* arbolPac)
+void mostrarUnNodoArbol(nodoArbol* arbolPac,empleadoLab UnEmpleado)
 {
+    if((arbolPac->Paciente.Eliminado == 0) || (strcmp(UnEmpleado.perfil,ADMINISTRADOR)== 0))
+    {
         printf("Datos del paciente---------> \n");
         printf("Apellido y nombre: %s\n",arbolPac->Paciente.ApellidoYNombe);
         printf("Edad: %i \n",arbolPac->Paciente.Edad);
@@ -79,8 +81,8 @@ void mostrarUnNodoArbol(nodoArbol* arbolPac)
         printf("Direccion: %s\n",arbolPac->Paciente.Direccion);
         printf("Telefono: %s\n",arbolPac->Paciente.Telefono);
         printf("-------------------------------------------------------------------------\n");
-        mostrarListaIngreso(arbolPac->listaIngresos);
-
+        mostrarListaIngreso(arbolPac->listaIngresos,UnEmpleado);
+    }
 }
 
 nodoArbol* buscarNodoArbolPac(nodoArbol * arbolPac,char UnPaciente[]){ //esta funcion busca un nombre segun el critero de ordenamiento haciendo eficiente la busqueda
@@ -262,6 +264,7 @@ nodoArbol* modArbolCatch(nodoArbol* buscadoModif){
             break;
           case 2:printf("Inserte el nuevo dni: ");
                  scanf("%i",&buscadoModif->Paciente.Dni);
+                 buscadoModif->listaIngresos->Ingreso.DniPaciente = buscadoModif->Paciente.Dni;
                  printf("\n");
             break;
           case 3:printf("Inserte la nueva direccion: ");
@@ -627,28 +630,33 @@ void recorrerArbolYbuscarPrac(nodoArbol* arbolPac,int UnaPrac,int* flag)
 
 
 
-void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int* validosPracticas)
+void darDeBajaUnaPractica(nodoArbol* arbolPac,practicaLab Practicas[],int validosPracticas)
 {
     int i = 0; int UnaPractica;
     printf("Ingrese Numero de practica a dar de baja: \n");
     fflush(stdin);
     scanf("%i",&UnaPractica);
     int flag = 0;
-
+    int flagE = 0;
 
     recorrerArbolYbuscarPrac(arbolPac,UnaPractica,&flag);
 
-    while(i<(*validosPracticas))
+    while(i<validosPracticas && flagE == 0)
     {
 
-        if((Practicas[i].NroPract == UnaPractica && (flag) == 0))
+        if((Practicas[i].NroPract == UnaPractica && (flag == 1)))
         {
+            printf("Se ha eliminado la practica correctamente\n");
             Practicas[i].Eliminado = 1;
+            flagE = 1;
         }
 
         i++;
     }
-
+    if(flagE !=1)
+    {
+        printf("No se ha encontrado una practica con ese valor\n");
+    }
 }
 
 
@@ -730,17 +738,496 @@ nodoArbol* guardarDatosArchiEnArbol(nodoArbol* arbolPac)
    return arbolPac;
 }
 
-void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int validosPracticas)
+
+
+void menuDeSistemaAdministrativo()
+{
+    printf("1->Mostrar todos los pacientes con sus ingresos y practicas\n");
+    printf("2->Buscar un paciente y mostrarlo\n");
+    printf("3->Mostrar Ingresos de un paciente\n");
+    printf("4->Mostrar Practicas de un ingreso\n");
+    printf("5->Mostrar todas las practicas\n");
+    printf("6->Mostrar Empleados\n");
+    printf("7->Salir\n");
+
+}
+
+
+
+
+void sistemaModoAdministrativo(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE)
 {
 
-    printf("Se ingreso al sistema");
+
+    int validosPracticas = (*validosP);
+      int validosEmpleados = (*validosE);
+    int op = 99;
+    nodoArbol* auxiliar = inicArbol();
+    nodoIngreso* auxiliarLista = inicListaDIngreso();
+    char UnPaciente[30];
+    int NroIngreso;
+    while(op != 7)
+    {
+        menuDeSistemaAdministrativo();
+        printf("Ingrese un numero para acceder a la funcion que quiera: ");
+        fflush(stdin);
+        scanf("%i",&op);
+        system("cls");
+        switch(op)
+        {
+        case 1: inOrderArbolPac(arbolPac,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 2: printf("Ingrese nombre del paciente a buscar: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarUnNodoArbol(auxiliar,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 3: printf("Ingrese Nombre del paciente para mostrar solo sus ingresos: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarListaIngreso(auxiliar->listaIngresos,UnEmpleado);
+
+                    system("pause");
+                    system("cls");
+            break;
+        case 4: printf("Ingrese nombre del paciente y numero del ingreso para mostrar solo sus practicas \n");
+                printf("Nombre y Apellido: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                printf("Nro Ingreo: ");
+                scanf("%i",&NroIngreso);
+
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                if(auxiliar!=NULL)
+                {
+                    auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                    mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                }else{
+                    while(auxiliar == NULL)
+                    {
+                        printf("El valor ingresado no es valido porfavor ingrese otro");
+                        printf("Nombre y Apellido: ");
+                        fflush(stdin);
+                        gets(&UnPaciente);
+                        printf("Nro Ingreo: ");
+                        scanf("%i",&NroIngreso);
+                        auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                        if(auxiliar !=NULL)
+                        {
+                            auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                            mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                        }
+                    }
+
+                }
+                    system("pause");
+                    system("cls");
+            break;
+        case 5: mostrarPractica(Practicas,validosPracticas,UnEmpleado);
+                    system("pause");
+                    system("cls");
+            break;
+
+            case 6: mostrarEmpleados(Empleados,validosEmpleados,UnEmpleado);
+                    system("pause");
+                    system("cls");
+            break;
+            case 7: op = 7;
+            break;
+       default: printf("Por favor ingrese una opcion valida\n");
+
+        }
+    }
+ persistirDatosDelArbol(arbolPac);
+ empleadosToArch(Empleados,validosEmpleados);
+ persistirPracticas(Practicas,validosPracticas);
+}
+
+
+
+
+
+
+
+void menuDeSistemaTecnico()
+{
+    printf("1->Mostrar todos los pacientes con sus ingresos y practicas\n");
+    printf("2->Dar de alta un paciente con ingreso y practica\n");
+    printf("3->Modificar un paciente\n");
+    printf("4->Buscar un paciente y mostrarlo\n");
+    printf("5->Mostrar Ingresos de un paciente\n");
+    printf("6->Mostrar Practicas de un ingreso\n");
+    printf("7->Modificar un ingreso\n");
+    printf("8->Modificar una practica\n");
+    printf("9->Dar de baja un paciente\n");
+    printf("10->Dar de baja un ingreso\n");
+    printf("11->Mostrar todas las practicas\n");
+    printf("12->Salir\n");
+
+}
+
+
+void sistemaModoTecnico(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE)
+{
+
+
+    int validosPracticas = (*validosP);
+      int validosEmpleados = (*validosE);
+    int op = 99;
+    nodoArbol* auxiliar = inicArbol();
+    nodoIngreso* auxiliarLista = inicListaDIngreso();
+    char UnPaciente[30];
+    int NroIngreso;
+    while(op != 12)
+    {
+        menuDeSistemaTecnico();
+        printf("Ingrese un numero para acceder a la funcion que quiera: ");
+        fflush(stdin);
+        scanf("%i",&op);
+        system("cls");
+        switch(op)
+        {
+        case 1: inOrderArbolPac(arbolPac,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 2: arbolPac = cargarUnPacienteAlNodo(arbolPac);
+
+                system("pause");
+                system("cls");
+            break;
+        case 3: arbolPac = modificarSoloNodoArbol(arbolPac);
+
+                system("pause");
+                system("cls");
+            break;
+
+        case 4: printf("Ingrese nombre del paciente a buscar: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarUnNodoArbol(auxiliar,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 5: printf("Ingrese Nombre del paciente para mostrar solo sus ingresos: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarListaIngreso(auxiliar->listaIngresos,UnEmpleado);
+
+                    system("pause");
+                    system("cls");
+            break;
+        case 6: printf("Ingrese nombre del paciente y numero del ingreso para mostrar solo sus practicas \n");
+                printf("Nombre y Apellido: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                printf("Nro Ingreo: ");
+                scanf("%i",&NroIngreso);
+
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                if(auxiliar!=NULL)
+                {
+                    auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                    mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                }else{
+                    while(auxiliar == NULL)
+                    {
+                        printf("El valor ingresado no es valido porfavor ingrese otro");
+                        printf("Nombre y Apellido: ");
+                        fflush(stdin);
+                        gets(&UnPaciente);
+                        printf("Nro Ingreo: ");
+                        scanf("%i",&NroIngreso);
+                        auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                        if(auxiliar !=NULL)
+                        {
+                            auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                            mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                        }
+                    }
+
+                }
+                    system("pause");
+                    system("cls");
+            break;
+        case 7:  auxiliar = modificarSoloNodoIngreso(arbolPac);
+                 if(auxiliar !=NULL)
+                 {
+                     arbolPac = auxiliar;
+                 }
+                    system("pause");
+                    system("cls");
+            break;
+        case 8: auxiliar = modificarSoloNodoPractica(arbolPac);
+                 if(auxiliar !=NULL)
+                 {
+                     arbolPac = auxiliar;
+                 }
+                    system("pause");
+                    system("cls");
+            break;
+        case 9: auxiliar = darDeBajaUnPaciente(arbolPac);
+                if(auxiliar !=NULL)
+                {
+                    arbolPac = auxiliar;
+                }
+            break;
+        case 10:    auxiliar = darBajaIngresoYPrac(arbolPac);
+                    if(auxiliar !=NULL)
+                    {
+                        arbolPac = auxiliar;
+                    }
+                    system("pause");
+                    system("cls");
+            break;
+
+        case 11: mostrarPractica(Practicas,validosPracticas,UnEmpleado);
+                    system("pause");
+                    system("cls");
+            break;
+
+        case 12: op = 12;
+            break;
+       default: printf("Por favor ingrese una opcion valida\n");
+
+        }
+    }
+ persistirDatosDelArbol(arbolPac);
+ empleadosToArch(Empleados,validosEmpleados);
+ persistirPracticas(Practicas,validosPracticas);
+}
+
+
+
+
+
+
+
+
+
+
+void menuDeSistemaAdministrador()
+{
+    printf("1->Mostrar todos los pacientes con sus ingresos y practicas\n");
+    printf("2->Dar de alta un paciente con ingreso y practica\n");
+    printf("3->Modificar un paciente\n");
+    printf("4->Buscar un paciente y mostrarlo\n");
+    printf("5->Mostrar Ingresos de un paciente\n");
+    printf("6->Mostrar Practicas de un ingreso\n");
+    printf("7->Modificar un ingreso\n");
+    printf("8->Modificar una practica\n");
+    printf("9->Dar de baja un paciente\n");
+    printf("10->Dar de baja un ingreso\n");
+    printf("11->Mostrar todos los empleados\n");
+    printf("12->Mostrar todas las practicas\n");
+    printf("13->Dar de Baja una practica\n");
+    printf("14->Agregar una practica\n");
+    printf("15->Agregar un empleado\n");
+    printf("16->Modificar un empleado\n");
+    printf("17->Salir\n");
+
+}
+
+
+
+
+
+void sistemaModoAdministrador(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosP,empleadoLab Empleados[],int* validosE)
+{
+
+
+
+      int validosPracticas = (*validosP);
+      int validosEmpleados = (*validosE);
+    int op = 99;
+    nodoArbol* auxiliar = inicArbol();
+    nodoIngreso* auxiliarLista = inicListaDIngreso();
+    char UnPaciente[30];
+    int NroIngreso;
+    while(op != 17)
+    {
+        menuDeSistemaAdministrador();
+        printf("Ingrese un numero para acceder a la funcion que quiera: ");
+        fflush(stdin);
+        scanf("%i",&op);
+        system("cls");
+        switch(op)
+        {
+        case 1: inOrderArbolPac(arbolPac,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 2: arbolPac = cargarUnPacienteAlNodo(arbolPac);
+
+                system("pause");
+                system("cls");
+            break;
+        case 3: arbolPac = modificarSoloNodoArbol(arbolPac);
+
+                system("pause");
+                system("cls");
+            break;
+
+        case 4: printf("Ingrese nombre del paciente a buscar: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarUnNodoArbol(auxiliar,UnEmpleado);
+                system("pause");
+                system("cls");
+            break;
+        case 5: printf("Ingrese Nombre del paciente para mostrar solo sus ingresos: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                mostrarListaIngreso(auxiliar->listaIngresos,UnEmpleado);
+
+                    system("pause");
+                    system("cls");
+            break;
+        case 6: printf("Ingrese nombre del paciente y numero del ingreso para mostrar solo sus practicas \n");
+                printf("Nombre y Apellido: ");
+                fflush(stdin);
+                gets(&UnPaciente);
+                printf("Nro Ingreo: ");
+                scanf("%i",&NroIngreso);
+
+                auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                if(auxiliar!=NULL)
+                {
+                    auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                    mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                }else{
+                    while(auxiliar == NULL)
+                    {
+                        printf("El valor ingresado no es valido porfavor ingrese otro");
+                        printf("Nombre y Apellido: ");
+                        fflush(stdin);
+                        gets(&UnPaciente);
+                        printf("Nro Ingreo: ");
+                        scanf("%i",&NroIngreso);
+                        auxiliar = buscarNodoArbolPac(arbolPac,UnPaciente);
+                        if(auxiliar !=NULL)
+                        {
+                            auxiliarLista = buscarIngreso(auxiliar->listaIngresos,NroIngreso);
+                            mostrarListaPracXingreso(auxiliarLista->listaPracXingreso);
+                        }
+                    }
+
+                }
+                    system("pause");
+                    system("cls");
+            break;
+        case 7:  auxiliar = modificarSoloNodoIngreso(arbolPac);
+                 if(auxiliar !=NULL)
+                 {
+                     arbolPac = auxiliar;
+                 }
+                    system("pause");
+                    system("cls");
+            break;
+        case 8: auxiliar = modificarSoloNodoPractica(arbolPac);
+                 if(auxiliar !=NULL)
+                 {
+                     arbolPac = auxiliar;
+                 }
+                    system("pause");
+                    system("cls");
+            break;
+        case 9: auxiliar = darDeBajaUnPaciente(arbolPac);
+                if(auxiliar !=NULL)
+                {
+                    arbolPac = auxiliar;
+                }
+            break;
+        case 10:    auxiliar = darBajaIngresoYPrac(arbolPac);
+                    if(auxiliar !=NULL)
+                    {
+                        arbolPac = auxiliar;
+                    }
+                    system("pause");
+                    system("cls");
+            break;
+        case 11: mostrarEmpleados(Empleados,validosEmpleados,UnEmpleado);
+                    system("pause");
+                    system("cls");
+            break;
+        case 12: mostrarPractica(Practicas,validosPracticas,UnEmpleado);
+                    system("pause");
+                    system("cls");
+            break;
+        case 13: darDeBajaUnaPractica(arbolPac,Practicas,validosPracticas);
+                (*validosP) = validosPracticas;
+                  system("pause");
+                  system("cls");
+            break;
+        case 14: darAltaAgregarUnaPractica(Practicas,&validosPracticas);
+                 system("pause");
+                  system("cls");
+            break;
+        case 15: darAltaAgregarUnEmpleado(Empleados,&validosEmpleados);
+                (*validosE) = validosEmpleados;
+                 system("pause");
+                  system("cls");
+            break;
+        case 16: modificarUnEmpleado(Empleados,validosEmpleados);
+                 system("pause");
+                 system("cls");
+            break;
+        case 17: op = 17;
+            break;
+       default: printf("Por favor ingrese una opcion valida\n");
+
+        }
+    }
+ persistirDatosDelArbol(arbolPac);
+ empleadosToArch(Empleados,validosEmpleados);
+ persistirPracticas(Practicas,validosPracticas);
+}
+
+
+
+void ingresarSistema(nodoArbol* arbolPac,empleadoLab UnEmpleado,practicaLab Practicas[],int* validosPracticas,empleadoLab Empleados[],int* validosEmpleados)
+{
+
+    system("cls");
+
+    if( strcmp(UnEmpleado.perfil,ADMINISTRADOR)== 0)
+    {
+        printf("Bienvenido %s , usted se encuentra en modo %s\n",UnEmpleado.ApellidoYnombreEmpleado,UnEmpleado.perfil);
+        sistemaModoAdministrador(arbolPac,UnEmpleado,Practicas,validosPracticas,Empleados,validosEmpleados);
+
+    }else if((strcmp(UnEmpleado.perfil,TECNICO)==0)||(strcmp(UnEmpleado.perfil,BIOQUIMICO)==0))
+             {
+
+                 printf("Bienvenido %s, usted se encuentra en modo %s\n",UnEmpleado.ApellidoYnombreEmpleado,UnEmpleado.perfil);
+                         sistemaModoTecnico(arbolPac,UnEmpleado,Practicas,validosPracticas,Empleados,validosEmpleados);
+             }else if((strcmp(UnEmpleado.perfil,ADMINISTRATIVO)== 0))
+             {
+
+                 printf("Bienvenido %s , usted se encuentra en modo %s\n",UnEmpleado.ApellidoYnombreEmpleado,UnEmpleado.perfil);
+                 sistemaModoAdministrativo(arbolPac,UnEmpleado,Practicas,validosPracticas,Empleados,validosEmpleados);
+             }
 
 
 }
 
 
-void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpleados,practicaLab Practicas[],int validosPracticas)
+void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int* validosEmpleados,practicaLab Practicas[],int* validosPracticas)
 {
+
+
+
+
+
     empleadoLab UnEmpleado;int * flag = 0;
     printf("Ingrese Usuario: ");
     fflush(stdin);
@@ -748,7 +1235,6 @@ void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpl
     printf("Ingrese contraseña: ");
     fflush(stdin);
     gets(&UnEmpleado.Contrasena);
-
 
 
     UnEmpleado = buscarUnEmpleadoYConstrasena(Empleados,validosEmpleados,UnEmpleado,&flag);
@@ -763,15 +1249,15 @@ void checkearUsuario(nodoArbol* arbolPac,empleadoLab Empleados[],int validosEmpl
         fflush(stdin);
         gets(&UnEmpleado.Contrasena);
 
-       printf("%i",(*flag));
+
         UnEmpleado = buscarUnEmpleadoYConstrasena(Empleados,validosEmpleados,UnEmpleado,&flag);
 
 
     }
 
-    if(flag==1)
+        if(flag==1)
         {
-            ingresarSistema(arbolPac,UnEmpleado,Practicas,validosPracticas);
+            ingresarSistema(arbolPac,UnEmpleado,Practicas,&validosPracticas,Empleados,&validosEmpleados);
         }
 
 

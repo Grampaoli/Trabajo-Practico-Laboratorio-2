@@ -117,6 +117,7 @@ void darAltaAgregarUnaPractica(practicaLab Practicas[],int* validosPracticas){
     char seguir = 's';
     int i;
     int flag;
+
     while(seguir == 's' && (*validosPracticas)<CANTMAXPRACTICAS)
     {
         i = *validosPracticas;
@@ -168,19 +169,7 @@ int buscarUnaPractica(practicaLab Practicas[],int validos,practicaLab UnaPractic
     return flag;
 }
 
-void mostrarPractica(practicaLab Practicas[],int* validosPracticas)
-{
-    int j = *validosPracticas;
-    for(int i = 0;i<j;i++)
-    {
-        printf("Datos de la practica--------->\n");
-        printf("Numero de la practica: %i\n",Practicas[i].NroPract);
-        printf("Nombre de la practica: %s\n",Practicas[i].nombrePract);
-        printf("__________________________________________________________\n");
 
-    }
-
-}
 
 
 void persistirPracticas(practicaLab Practicas[],int validos)
@@ -198,7 +187,6 @@ void persistirPracticas(practicaLab Practicas[],int validos)
 
             UnaPrac.NroPract = Practicas[i].NroPract;
             strcpy(&UnaPrac.nombrePract,Practicas[i].nombrePract);
-            printf("%s",UnaPrac.nombrePract);
             UnaPrac.Eliminado = Practicas[i].Eliminado;
          fwrite(&UnaPrac,sizeof(practicaLab),1,arch);
         }

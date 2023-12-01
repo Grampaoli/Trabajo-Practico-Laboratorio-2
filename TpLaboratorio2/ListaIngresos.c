@@ -40,6 +40,7 @@ nodoIngreso * agregarPpioListaIngreso(nodoIngreso * listaIngreso, nodoIngreso* n
 
 void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux){
 
+
     printf("   Datos del ingreso----------->\n");
     printf("   Numero de ingreso: %i\n",nodoAux->Ingreso.NroIngreso);
     printf("   Dni del Paciente %i\n",nodoAux->Ingreso.DniPaciente);
@@ -51,21 +52,23 @@ void mostrarSoloUnNodoIngreso(nodoIngreso* nodoAux){
 }
 
 
-void mostrarUnNodoIngreso(nodoIngreso * nodoAux)
+void mostrarUnNodoIngreso(nodoIngreso * nodoAux,empleadoLab UnEmpleado)
 {
 
-    mostrarSoloUnNodoIngreso(nodoAux);
-    mostrarListaPracXingreso(nodoAux->listaPracXingreso);
-
+    if((nodoAux->Ingreso.Eliminado != 1) || (strcmp(UnEmpleado.perfil,ADMINISTRADOR)== 0))
+    {
+        mostrarSoloUnNodoIngreso(nodoAux);
+        mostrarListaPracXingreso(nodoAux->listaPracXingreso);
+    }
 
 }
 
-void mostrarListaIngreso(nodoIngreso * listaIngreso)
+void mostrarListaIngreso(nodoIngreso * listaIngreso,empleadoLab UnEmpleado)
 {
     nodoIngreso* seg = listaIngreso;
     while(seg !=NULL)
     {
-        mostrarUnNodoIngreso(seg);
+        mostrarUnNodoIngreso(seg,UnEmpleado);
         seg = seg->siguiente;
     }
 
@@ -232,13 +235,81 @@ int buscarUnEmpleado(empleadoLab Empleados[],int validos,empleadoLab UnEmpleado)
   return flag;
 }
 
-
-
-
-
-void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados)
+void menuOpcionesModEmpleado()
 {
-    int j = *validosEmpleados;
+    printf("1->Usuario\n");
+    printf("2->Contrasena\n");
+    printf("3->Dni\n");
+    printf("4->Perfil\n");
+    printf("5->Salir\n");
+
+}
+
+
+void modificarUnEmpleado(empleadoLab Empleados[],int validos)
+{
+    int i = 0;
+    int flag = 0;
+    empleadoLab UnEmpleado;
+    int opaux = 99;
+    printf("Inserte el nombre y apellido del usuario que desea modificar: ");
+    fflush(stdin);
+    gets(&UnEmpleado.ApellidoYnombreEmpleado);
+
+    flag = buscarUnEmpleado(Empleados,validos,UnEmpleado);
+    printf("%i",flag);
+    if(flag == 1)
+    {
+        while(i<validos && opaux != 5)
+        {
+
+            if(strcmp(Empleados[i].ApellidoYnombreEmpleado,UnEmpleado.ApellidoYnombreEmpleado)==0)
+            {
+                printf("Ingrese la opcion que desea modificar: ");
+                menuOpcionesModEmpleado();
+                scanf("%i",&opaux);
+                switch(opaux)
+                {
+                case 1:printf("Ingrese el usuario nuevo:");
+                        fflush(stdin);
+                        gets(&Empleados[i].Usuario);
+                    break;
+                case 2:printf("Ingrese la nueva contraseña: ");
+                       fflush(stdin);
+                       gets(&Empleados[i].Contrasena);
+                    break;
+                case 3:printf("Ingrese el nuevo Dni: ");
+                        scanf("%i",&Empleados[i].DniEmpleado);
+                    break;
+                case 4:printf("Ingrese otro perfil sea [Administrativo],[Tecnico o Bioquimico] o [Administrador]: ");
+                       fflush(stdin);
+                       gets(&Empleados[i].perfil);
+                       while((strcmp(Empleados[i].perfil,ADMINISTRADOR)!= 0)&& (strcmp(Empleados[i].perfil,TECNICO)!= 0)&&(strcmp(Empleados[i].perfil,ADMINISTRATIVO) != 0)&& strcmp(Empleados[i].perfil,BIOQUIMICO)!= 0)
+                       {
+                           printf("Ese valor no es valido\n");
+                           fflush(stdin);
+                           gets(&Empleados[i].perfil);
+                       }
+                    break;
+                case 5: opaux = 5;
+                    break;
+                default: printf("Ingreso un valor no valido\n");
+
+                }
+
+            }
+            i++;
+        }
+    }
+
+}
+
+
+
+
+void mostrarEmpleados(empleadoLab Empleados[],int validosEmpleados,empleadoLab UnEmpleado)
+{
+    int j = validosEmpleados;
     for(int i = 0;i<j;i++)
     {
         printf("Datos del empleado ------->\n");
@@ -246,7 +317,12 @@ void mostrarEmpleados(empleadoLab Empleados[],int* validosEmpleados)
         printf("Dni: %i\n",Empleados[i].DniEmpleado);
         printf("Perfil: %s\n",Empleados[i].perfil);
         printf("Usuario: %s\n",Empleados[i].Usuario);
+        if(strcmp(UnEmpleado.perfil,ADMINISTRADOR)==0)
+        {
+            printf("Contraseña: %s\n",Empleados[i].Contrasena);
+        }else{
         printf("Contraseña: ******\n");
+        }
         printf("_____________________________________\n");
     }
 
@@ -323,4 +399,21 @@ empleadoLab buscarUnEmpleadoYConstrasena(empleadoLab Empleados[],int validos,emp
     }
 
   return UnEmpleado;
+}
+
+
+void mostrarPractica(practicaLab Practicas[],int validosPracticas,empleadoLab UnEmpleado)
+{
+    int j = validosPracticas;
+    for(int i = 0;i<j;i++)
+    {
+        if(Practicas[i].Eliminado != 1)
+        {
+        printf("Datos de la practica--------->\n");
+        printf("Numero de la practica: %i\n",Practicas[i].NroPract);
+        printf("Nombre de la practica: %s\n",Practicas[i].nombrePract);
+        printf("__________________________________________________________\n");
+        }
+    }
+
 }
